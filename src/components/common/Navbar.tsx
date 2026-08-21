@@ -12,15 +12,21 @@ import {
   ExternalLink,
   Sun,
   Moon,
+  Menu,
 } from 'lucide-react';
 import { UpiQrModal } from './UpiQrModal';
 
 interface NavbarProps {
   onOpenInvoiceModal: () => void;
   onOpenQuoteModal: () => void;
+  onToggleMobileMenu?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenInvoiceModal, onOpenQuoteModal }) => {
+export const Navbar: React.FC<NavbarProps> = ({
+  onOpenInvoiceModal,
+  onOpenQuoteModal,
+  onToggleMobileMenu,
+}) => {
   const {
     userProfile,
     metrics,
@@ -58,20 +64,30 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInvoiceModal, onOpenQuoteM
       <header className="sticky top-0 z-30 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            {/* Left: Brand Identity */}
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center shadow-glow-green text-white font-bold text-xl tracking-wider">
+            {/* Left: Brand Identity + Mobile Menu Button */}
+            <div className="flex items-center space-x-2.5">
+              {onToggleMobileMenu && (
+                <button
+                  onClick={onToggleMobileMenu}
+                  className="md:hidden p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                  aria-label="Open mobile menu"
+                >
+                  <Menu className="w-5 h-5" />
+                </button>
+              )}
+
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center shadow-glow-green text-white font-bold text-lg sm:text-xl tracking-wider shrink-0">
                 PF
               </div>
               <div>
-                <div className="flex items-center space-x-2">
-                  <span className="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">PayFlow</span>
-                  <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
-                    Easy Hisaab / आसान हिसाब
+                <div className="flex items-center space-x-1.5 sm:space-x-2">
+                  <span className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">PayFlow</span>
+                  <span className="text-[9px] sm:text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                    Easy Hisaab
                   </span>
                 </div>
                 <p className="text-[11px] text-slate-500 dark:text-slate-400 hidden sm:block font-medium">
-                  WhatsApp Share • Instant UPI QR • Easy Udhaar Manager (उधार मैनेजर)
+                  WhatsApp Share • Instant UPI QR • Easy Udhaar Manager
                 </p>
               </div>
             </div>
