@@ -11,7 +11,6 @@ import { QuoteGenerator } from './modules/quotes/QuoteGenerator';
 import { ClientCRM } from './modules/clients/ClientCRM';
 import { UpiReconciliation } from './modules/reconciliation/UpiReconciliation';
 import { PricingStore } from './components/pricing/PricingStore';
-import { HackathonDemoBar } from './components/demo/HackathonDemoBar';
 import { InvoiceBuilderModal } from './modules/invoicing/InvoiceBuilderModal';
 import { QuoteGeneratorModal } from './modules/quotes/QuoteGeneratorModal';
 import { OnboardingModal } from './components/onboarding/OnboardingModal';
@@ -204,13 +203,6 @@ const PayFlowContent: React.FC = () => {
           <span>Grahak</span>
         </button>
       </div>
-
-      {/* 3-Minute Hackathon Demo Controller Bar */}
-      <HackathonDemoBar
-        onNavigateTab={(tab) => handleTabChange(tab)}
-        onOpenInvoiceModal={() => setIsInvoiceModalOpen(true)}
-        onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
-      />
 
       {/* Global Modals */}
       {isInvoiceModalOpen && (
