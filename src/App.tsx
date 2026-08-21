@@ -65,7 +65,7 @@ const PayFlowContent: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col font-sans transition-colors duration-200">
       {/* Top Navigation */}
       <Navbar
         onOpenInvoiceModal={() => setIsInvoiceModalOpen(true)}

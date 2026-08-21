@@ -220,57 +220,57 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       {/* Recent Invoices & Live Activity Feed Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left: Recent Invoices */}
-        <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
-          <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-100">
+        <div className="lg:col-span-2 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 shadow-sm transition-colors">
+          <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-100 dark:border-slate-800">
             <div className="flex items-center space-x-2">
-              <FileText className="w-4 h-4 text-emerald-600" />
-              <h3 className="font-bold text-xs uppercase tracking-wider text-slate-800">
+              <FileText className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+              <h3 className="font-bold text-xs uppercase tracking-wider text-slate-800 dark:text-slate-200">
                 Recent Invoices ({invoices.length})
               </h3>
             </div>
             <button
               onClick={() => onNavigateTab('invoicing')}
-              className="text-xs text-emerald-600 hover:text-emerald-700 font-bold flex items-center space-x-1"
+              className="text-xs text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 font-bold flex items-center space-x-1"
             >
               <span>View All</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
 
-          <div className="divide-y divide-slate-100">
+          <div className="divide-y divide-slate-100 dark:divide-slate-800">
             {recentInvoices.map((inv) => (
               <div
                 key={inv.id}
-                className="py-3 flex items-center justify-between hover:bg-slate-50/60 rounded-xl px-2 transition-colors"
+                className="py-3 flex items-center justify-between hover:bg-slate-50/60 dark:hover:bg-slate-800/60 rounded-xl px-2 transition-colors"
               >
                 <div className="flex items-center space-x-3">
                   <div
                     className={`w-9 h-9 rounded-xl flex items-center justify-center font-bold text-xs ${
                       inv.status === 'paid'
-                        ? 'bg-emerald-100 text-emerald-800'
+                        ? 'bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300'
                         : inv.status === 'overdue'
-                        ? 'bg-red-100 text-red-800'
-                        : 'bg-amber-100 text-amber-800'
+                        ? 'bg-red-100 dark:bg-red-950 text-red-800 dark:text-red-300'
+                        : 'bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300'
                     }`}
                   >
                     {inv.clientName.charAt(0)}
                   </div>
                   <div>
                     <div className="flex items-center space-x-2">
-                      <span className="font-bold text-xs text-slate-900">{inv.clientName}</span>
-                      <span className="text-[10px] font-mono text-slate-500">{inv.invoiceNumber}</span>
+                      <span className="font-bold text-xs text-slate-900 dark:text-white">{inv.clientName}</span>
+                      <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400">{inv.invoiceNumber}</span>
                     </div>
-                    <span className="text-[11px] text-slate-400">Due: {formatDate(inv.dueDate)}</span>
+                    <span className="text-[11px] text-slate-400 dark:text-slate-500">Due: {formatDate(inv.dueDate)}</span>
                   </div>
                 </div>
 
                 <div className="flex items-center space-x-3">
-                  <span className="font-mono font-black text-xs text-slate-900">
+                  <span className="font-mono font-black text-xs text-slate-900 dark:text-white">
                     {formatCurrency(inv.total)}
                   </span>
                   <button
                     onClick={() => setPreviewInvoice(inv)}
-                    className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg text-xs"
+                    className="p-1.5 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-xs"
                     title="Preview Invoice"
                   >
                     View
@@ -282,11 +282,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         </div>
 
         {/* Right: Live Activity Feed */}
-        <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex flex-col justify-between">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 shadow-sm flex flex-col justify-between transition-colors">
           <div>
-            <div className="flex items-center space-x-2 mb-4 pb-2 border-b border-slate-100">
-              <Activity className="w-4 h-4 text-purple-600" />
-              <h3 className="font-bold text-xs uppercase tracking-wider text-slate-800">
+            <div className="flex items-center space-x-2 mb-4 pb-2 border-b border-slate-100 dark:border-slate-800">
+              <Activity className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+              <h3 className="font-bold text-xs uppercase tracking-wider text-slate-800 dark:text-slate-200">
                 Live Activity Feed
               </h3>
             </div>
@@ -295,41 +295,41 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               <div className="flex items-start space-x-2.5">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 mt-1.5 shrink-0" />
                 <div>
-                  <p className="text-slate-800 font-semibold">Payment of ₹15,000 settled</p>
-                  <p className="text-[11px] text-slate-400">Priya Patel via Google Pay UPI • 15 Aug</p>
+                  <p className="text-slate-800 dark:text-slate-200 font-semibold">Payment of ₹15,000 settled</p>
+                  <p className="text-[11px] text-slate-400 dark:text-slate-500">Priya Patel via Google Pay UPI • 15 Aug</p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-2.5">
                 <span className="w-2 h-2 rounded-full bg-amber-500 mt-1.5 shrink-0" />
                 <div>
-                  <p className="text-slate-800 font-semibold">WhatsApp Chaser Delivered</p>
-                  <p className="text-[11px] text-slate-400">Invoice #INV-1024 to Rahul Sharma • 20 Aug</p>
+                  <p className="text-slate-800 dark:text-slate-200 font-semibold">WhatsApp Chaser Delivered</p>
+                  <p className="text-[11px] text-slate-400 dark:text-slate-500">Invoice #INV-1024 to Rahul Sharma • 20 Aug</p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-2.5">
                 <span className="w-2 h-2 rounded-full bg-red-500 mt-1.5 shrink-0" />
                 <div>
-                  <p className="text-slate-800 font-semibold">Overdue Flag Triggered</p>
-                  <p className="text-[11px] text-slate-400">Invoice #INV-1019 (Vikram Verma) 16 days late</p>
+                  <p className="text-slate-800 dark:text-slate-200 font-semibold">Overdue Flag Triggered</p>
+                  <p className="text-[11px] text-slate-400 dark:text-slate-500">Invoice #INV-1019 (Vikram Verma) 16 days late</p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-2.5">
                 <span className="w-2 h-2 rounded-full bg-indigo-500 mt-1.5 shrink-0" />
                 <div>
-                  <p className="text-slate-800 font-semibold">AI Quote Generated</p>
-                  <p className="text-[11px] text-slate-400">#QT-501 for ₹10,000 (React Native Prototype)</p>
+                  <p className="text-slate-800 dark:text-slate-200 font-semibold">AI Quote Generated</p>
+                  <p className="text-[11px] text-slate-400 dark:text-slate-500">#QT-501 for ₹10,000 (React Native Prototype)</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="mt-4 pt-3 border-t border-slate-100">
+          <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800">
             <button
               onClick={() => onNavigateTab('intelligence')}
-              className="w-full py-2 rounded-xl bg-purple-50 text-purple-700 hover:bg-purple-100 font-bold text-xs transition-colors flex items-center justify-center space-x-1.5"
+              className="w-full py-2 rounded-xl bg-purple-50 dark:bg-purple-950/50 text-purple-700 dark:text-purple-300 hover:bg-purple-100 dark:hover:bg-purple-900/50 font-bold text-xs transition-colors flex items-center justify-center space-x-1.5"
             >
               <Sparkles className="w-3.5 h-3.5" />
               <span>Ask PayFlow Copilot</span>

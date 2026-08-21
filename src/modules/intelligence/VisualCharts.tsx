@@ -52,13 +52,13 @@ export const VisualCharts: React.FC = () => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       {/* 1. Monthly Revenue Trend */}
-      <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+      <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h3 className="font-bold text-sm text-slate-900">Income vs Invoiced Trend</h3>
-            <p className="text-xs text-slate-500">Monthly Cash Inflow vs Billed Receivables</p>
+            <h3 className="font-bold text-sm text-slate-900 dark:text-white">Income vs Invoiced Trend</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Monthly Cash Inflow vs Billed Receivables</p>
           </div>
-          <span className="text-xs font-mono font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-lg">
+          <span className="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-1 rounded-lg">
             +18% MoM Growth
           </span>
         </div>
@@ -76,17 +76,17 @@ export const VisualCharts: React.FC = () => {
                   <stop offset="95%" stopColor="#6366f1" stopOpacity={0.0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-              <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#64748b' }} axisLine={false} tickLine={false} />
+              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#334155" />
+              <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#94a3b8' }} axisLine={false} tickLine={false} />
               <YAxis
-                tick={{ fontSize: 11, fill: '#64748b' }}
+                tick={{ fontSize: 11, fill: '#94a3b8' }}
                 axisLine={false}
                 tickLine={false}
                 tickFormatter={(val) => `₹${val / 1000}k`}
               />
               <Tooltip
                 formatter={(value: any) => [formatCurrency(Number(value)), '']}
-                contentStyle={{ borderRadius: '12px', border: '1px solid #e2e8f0', fontSize: '12px' }}
+                contentStyle={{ borderRadius: '12px', backgroundColor: '#0f172a', borderColor: '#334155', color: '#f8fafc', fontSize: '12px' }}
               />
               <Area
                 type="monotone"
@@ -112,13 +112,13 @@ export const VisualCharts: React.FC = () => {
       </div>
 
       {/* 2. Paid vs Pending Status Breakdown */}
-      <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+      <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h3 className="font-bold text-sm text-slate-900">Receivables Distribution</h3>
-            <p className="text-xs text-slate-500">Collected Cash vs Pending vs Overdue</p>
+            <h3 className="font-bold text-sm text-slate-900 dark:text-white">Receivables Distribution</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Collected Cash vs Pending vs Overdue</p>
           </div>
-          <span className="text-xs font-mono font-bold text-slate-700 bg-slate-100 px-2 py-1 rounded-lg">
+          <span className="text-xs font-mono font-bold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-lg">
             {metrics.collectionRate}% Recovered
           </span>
         </div>
@@ -141,13 +141,13 @@ export const VisualCharts: React.FC = () => {
               </Pie>
               <Tooltip
                 formatter={(value: any) => [formatCurrency(Number(value)), '']}
-                contentStyle={{ borderRadius: '12px', border: '1px solid #e2e8f0', fontSize: '12px' }}
+                contentStyle={{ borderRadius: '12px', backgroundColor: '#0f172a', borderColor: '#334155', color: '#f8fafc', fontSize: '12px' }}
               />
               <Legend
                 verticalAlign="bottom"
                 height={36}
                 iconType="circle"
-                formatter={(value) => <span className="text-xs font-medium text-slate-700">{value}</span>}
+                formatter={(value) => <span className="text-xs font-medium text-slate-700 dark:text-slate-300">{value}</span>}
               />
             </PieChart>
           </ResponsiveContainer>
@@ -155,11 +155,11 @@ export const VisualCharts: React.FC = () => {
       </div>
 
       {/* 3. Revenue by Service / Category */}
-      <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm lg:col-span-2">
+      <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm lg:col-span-2 transition-colors">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h3 className="font-bold text-sm text-slate-900">Revenue by Service Category</h3>
-            <p className="text-xs text-slate-500">Top earning skillsets and deliverables</p>
+            <h3 className="font-bold text-sm text-slate-900 dark:text-white">Revenue by Service Category</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Top earning skillsets and deliverables</p>
           </div>
         </div>
 

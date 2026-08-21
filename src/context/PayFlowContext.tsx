@@ -62,6 +62,10 @@ interface PayFlowContextType {
   ) => ReminderLog;
   batchRemindOverdue: () => number;
 
+  // Dark Mode Theme
+  darkMode: boolean;
+  toggleDarkMode: () => void;
+
   // Active module for testing standalone micro-SaaS vs integrated pro suite
   activeModuleFilter: ActiveModule;
   setActiveModuleFilter: (module: ActiveModule) => void;
@@ -127,6 +131,25 @@ export const PayFlowProvider: React.FC<{ children: React.ReactNode }> = ({ child
     const saved = localStorage.getItem(`${LOCAL_STORAGE_KEY}_reminders`);
     return saved ? JSON.parse(saved) : initialReminderLogs;
   });
+
+  const [darkMode, setDarkMode] = useState<boolean>(() => {
+    const saved = localStorage.getItem(`${LOCAL_STORAGE_KEY}_darkmode`);
+    if (saved !== null) {
+      return JSON.parse(saved);
+    }
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
+
+  useEffect(() => {
+    localStorage.setItem(`${LOCAL_STORAGE_KEY}_darkmode`, JSON.stringify(darkMode));
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [darkMode]);
+
+  const toggleDarkMode = () => setDarkMode((prev) => !prev);
 
   const [activeModuleFilter, setActiveModuleFilter] = useState<ActiveModule>('all');
   const [demoStep, setDemoStep] = useState<number>(1);
@@ -584,6 +607,8 @@ export const PayFlowProvider: React.FC<{ children: React.ReactNode }> = ({ child
         reminderLogs,
         sendReminder,
         batchRemindOverdue,
+        darkMode,
+        toggleDarkMode,
         activeModuleFilter,
         setActiveModuleFilter,
         demoStep,
