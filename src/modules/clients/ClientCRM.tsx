@@ -99,18 +99,18 @@ export const ClientCRM: React.FC<{ onOpenInvoiceForClient?: (client: Client) => 
       </div>
 
       {/* Search Bar */}
-      <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
+      <div className="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between transition-colors">
         <div className="relative w-full sm:w-96">
-          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Search by client name, company, phone..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-lg outline-none focus:ring-2 focus:ring-teal-500 font-medium"
+            className="w-full pl-9 pr-3 py-2 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 rounded-lg outline-none focus:ring-2 focus:ring-teal-500 font-medium"
           />
         </div>
-        <span className="text-xs text-slate-500 hidden sm:inline">
+        <span className="text-xs text-slate-500 dark:text-slate-400 hidden sm:inline">
           Showing {filteredClients.length} of {clients.length} clients
         </span>
       </div>
@@ -124,7 +124,7 @@ export const ClientCRM: React.FC<{ onOpenInvoiceForClient?: (client: Client) => 
           return (
             <div
               key={client.id}
-              className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
+              className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
             >
               <div>
                 {/* Header with Reliability Score */}
@@ -134,18 +134,18 @@ export const ClientCRM: React.FC<{ onOpenInvoiceForClient?: (client: Client) => 
                       {client.name.charAt(0)}
                     </div>
                     <div>
-                      <h3 className="font-bold text-sm text-slate-900">{client.name}</h3>
-                      <p className="text-xs text-slate-500">{client.professionOrCompany}</p>
+                      <h3 className="font-bold text-sm text-slate-900 dark:text-white">{client.name}</h3>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">{client.professionOrCompany}</p>
                     </div>
                   </div>
 
                   <span
                     className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded-full ${
                       client.riskRating === 'high'
-                        ? 'bg-red-100 text-red-800'
+                        ? 'bg-red-100 dark:bg-red-950/80 text-red-800 dark:text-red-300'
                         : client.riskRating === 'medium'
-                        ? 'bg-amber-100 text-amber-800'
-                        : 'bg-emerald-100 text-emerald-800'
+                        ? 'bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300'
+                        : 'bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300'
                     }`}
                   >
                     {client.riskRating === 'high' ? '🔴 High Risk' : client.riskRating === 'medium' ? '🟡 Medium' : '🟢 Low Risk'}
@@ -153,20 +153,20 @@ export const ClientCRM: React.FC<{ onOpenInvoiceForClient?: (client: Client) => 
                 </div>
 
                 {/* Contact Info */}
-                <div className="space-y-1 text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                <div className="space-y-1 text-xs text-slate-600 dark:text-slate-300 mb-4 bg-slate-50 dark:bg-slate-800/80 p-2.5 rounded-xl border border-slate-100 dark:border-slate-700">
                   <div className="flex items-center space-x-2">
-                    <Phone className="w-3.5 h-3.5 text-slate-400" />
+                    <Phone className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
                     <span className="font-mono">{client.phone}</span>
                   </div>
                   {client.email && (
                     <div className="flex items-center space-x-2">
-                      <Mail className="w-3.5 h-3.5 text-slate-400" />
+                      <Mail className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
                       <span className="truncate">{client.email}</span>
                     </div>
                   )}
                   {client.address && (
                     <div className="flex items-center space-x-2">
-                      <MapPin className="w-3.5 h-3.5 text-slate-400" />
+                      <MapPin className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
                       <span className="truncate">{client.address}</span>
                     </div>
                   )}
@@ -174,17 +174,17 @@ export const ClientCRM: React.FC<{ onOpenInvoiceForClient?: (client: Client) => 
 
                 {/* Financial Ledger Metrics */}
                 <div className="grid grid-cols-2 gap-2 mb-4 text-xs">
-                  <div className="p-2 bg-slate-50 rounded-lg border border-slate-100">
-                    <span className="text-[10px] text-slate-400 block">Total Billed</span>
-                    <span className="font-bold font-mono text-slate-800">
+                  <div className="p-2 bg-slate-50 dark:bg-slate-800/80 rounded-lg border border-slate-100 dark:border-slate-700">
+                    <span className="text-[10px] text-slate-400 dark:text-slate-500 block">Total Billed</span>
+                    <span className="font-bold font-mono text-slate-800 dark:text-slate-200">
                       {formatCurrency(client.totalBilled)}
                     </span>
                   </div>
-                  <div className="p-2 bg-slate-50 rounded-lg border border-slate-100">
-                    <span className="text-[10px] text-slate-400 block">Balance Due</span>
+                  <div className="p-2 bg-slate-50 dark:bg-slate-800/80 rounded-lg border border-slate-100 dark:border-slate-700">
+                    <span className="text-[10px] text-slate-400 dark:text-slate-500 block">Balance Due</span>
                     <span
                       className={`font-bold font-mono ${
-                        client.outstandingBalance > 0 ? 'text-amber-600' : 'text-emerald-600'
+                        client.outstandingBalance > 0 ? 'text-amber-600 dark:text-amber-400' : 'text-emerald-600 dark:text-emerald-400'
                       }`}
                     >
                       {formatCurrency(client.outstandingBalance)}
@@ -194,13 +194,13 @@ export const ClientCRM: React.FC<{ onOpenInvoiceForClient?: (client: Client) => 
               </div>
 
               {/* Action Buttons */}
-              <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
+              <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
                 <div className="flex items-center space-x-1.5">
                   <a
                     href={whatsappUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="p-2 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 transition-colors"
+                    className="p-2 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 transition-colors"
                     title="Send WhatsApp Message"
                   >
                     <MessageSquare className="w-4 h-4" />
@@ -208,7 +208,7 @@ export const ClientCRM: React.FC<{ onOpenInvoiceForClient?: (client: Client) => 
 
                   <a
                     href={`tel:${client.phone}`}
-                    className="p-2 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 transition-colors"
+                    className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
                     title="Direct Call"
                   >
                     <Phone className="w-4 h-4" />
@@ -216,7 +216,7 @@ export const ClientCRM: React.FC<{ onOpenInvoiceForClient?: (client: Client) => 
 
                   <button
                     onClick={() => setStatementClient(client)}
-                    className="p-2 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 transition-colors"
+                    className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
                     title="View Account Statement"
                   >
                     <FileText className="w-4 h-4" />

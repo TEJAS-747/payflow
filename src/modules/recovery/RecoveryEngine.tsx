@@ -106,40 +106,40 @@ export const RecoveryEngine: React.FC = () => {
           </p>
         </div>
 
-        <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between transition-colors">
           <div className="flex items-center justify-between mb-1">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
               Total Outstanding
             </span>
             <Clock className="w-4 h-4 text-amber-500" />
           </div>
-          <div className="text-2xl font-black font-mono text-slate-900 mb-1">
+          <div className="text-2xl font-black font-mono text-slate-900 dark:text-white mb-1">
             {formatCurrency(metrics.totalOutstanding)}
           </div>
-          <div className="text-xs text-slate-500 flex items-center space-x-1">
+          <div className="text-xs text-slate-500 dark:text-slate-400 flex items-center space-x-1">
             <span>Due in next 3 days:</span>
-            <strong className="text-amber-600 font-mono">{formatCurrency(metrics.totalDueSoon)}</strong>
+            <strong className="text-amber-600 dark:text-amber-400 font-mono">{formatCurrency(metrics.totalDueSoon)}</strong>
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex flex-col justify-between">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between transition-colors">
           <div className="flex items-center justify-between mb-1">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
               Collection Efficiency
             </span>
-            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+            <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
           </div>
-          <div className="text-2xl font-black font-mono text-emerald-600 mb-1">
+          <div className="text-2xl font-black font-mono text-emerald-600 dark:text-emerald-400 mb-1">
             {metrics.collectionRate}%
           </div>
-          <div className="text-xs text-slate-500">
-            Avg settlement time: <strong className="text-slate-800 font-mono">4.2 days</strong>
+          <div className="text-xs text-slate-500 dark:text-slate-400">
+            Avg settlement time: <strong className="text-slate-800 dark:text-slate-200 font-mono">4.2 days</strong>
           </div>
         </div>
       </div>
 
       {/* Automated Escalation Schedule Info */}
-      <div className="bg-slate-900 text-white rounded-2xl p-5 shadow-sm">
+      <div className="bg-slate-900 dark:bg-slate-900/90 text-white rounded-2xl p-5 shadow-sm border border-transparent dark:border-slate-800">
         <div className="flex items-center space-x-2 mb-3">
           <ShieldAlert className="w-4 h-4 text-amber-400" />
           <h3 className="font-bold text-xs uppercase tracking-wider text-amber-300">
@@ -174,21 +174,21 @@ export const RecoveryEngine: React.FC = () => {
       </div>
 
       {/* Receivables Chasing List */}
-      <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-        <div className="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+      <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden transition-colors">
+        <div className="p-4 bg-slate-50 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <BellRing className="w-4 h-4 text-amber-600" />
-            <h3 className="font-bold text-xs uppercase tracking-wider text-slate-800">
+            <BellRing className="w-4 h-4 text-amber-600 dark:text-amber-400" />
+            <h3 className="font-bold text-xs uppercase tracking-wider text-slate-800 dark:text-slate-200">
               Active Receivables ({pendingAndOverdueInvoices.length})
             </h3>
           </div>
-          <span className="text-xs text-slate-500">Sorted by payment urgency & risk</span>
+          <span className="text-xs text-slate-500 dark:text-slate-400">Sorted by payment urgency & risk</span>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="bg-slate-50 text-slate-600 border-b border-slate-200 font-bold uppercase tracking-wider text-[11px]">
+              <tr className="bg-slate-50 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 border-b border-slate-200 dark:border-slate-700 font-bold uppercase tracking-wider text-[11px]">
                 <th className="py-3 px-4">Invoice #</th>
                 <th className="py-3 px-4">Client</th>
                 <th className="py-3 px-4">Due Date</th>
@@ -199,10 +199,10 @@ export const RecoveryEngine: React.FC = () => {
                 <th className="py-3 px-4 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {pendingAndOverdueInvoices.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="py-8 text-center text-slate-400">
+                  <td colSpan={8} className="py-8 text-center text-slate-400 dark:text-slate-500">
                     🎉 Fantastic! Zero pending or overdue invoices right now.
                   </td>
                 </tr>
@@ -212,27 +212,27 @@ export const RecoveryEngine: React.FC = () => {
                   const risk = getInvoiceRiskRating(inv);
 
                   return (
-                    <tr key={inv.id} className="hover:bg-slate-50/80 transition-colors">
-                      <td className="py-3.5 px-4 font-mono font-bold text-slate-900">
+                    <tr key={inv.id} className="hover:bg-slate-50/80 dark:hover:bg-slate-800/60 transition-colors">
+                      <td className="py-3.5 px-4 font-mono font-bold text-slate-900 dark:text-white">
                         {inv.invoiceNumber}
                       </td>
 
                       <td className="py-3.5 px-4">
-                        <div className="font-bold text-slate-800">{inv.clientName}</div>
-                        <div className="text-[11px] text-slate-400">{inv.clientPhone}</div>
+                        <div className="font-bold text-slate-800 dark:text-slate-200">{inv.clientName}</div>
+                        <div className="text-[11px] text-slate-400 dark:text-slate-500">{inv.clientPhone}</div>
                       </td>
 
-                      <td className="py-3.5 px-4 text-slate-600">
-                        <span className={overdueDays > 0 ? 'text-red-600 font-semibold' : ''}>
+                      <td className="py-3.5 px-4 text-slate-600 dark:text-slate-400">
+                        <span className={overdueDays > 0 ? 'text-red-600 dark:text-red-400 font-semibold' : ''}>
                           {formatDate(inv.dueDate)}
                         </span>
                       </td>
 
                       <td className="py-3.5 px-4 text-center">
                         {overdueDays > 0 ? (
-                          <span className="font-bold text-red-600 font-mono">+{overdueDays} days</span>
+                          <span className="font-bold text-red-600 dark:text-red-400 font-mono">+{overdueDays} days</span>
                         ) : (
-                          <span className="text-slate-400 font-mono">On Time</span>
+                          <span className="text-slate-400 dark:text-slate-500 font-mono">On Time</span>
                         )}
                       </td>
 
@@ -240,22 +240,22 @@ export const RecoveryEngine: React.FC = () => {
                         <span
                           className={`inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase ${
                             risk === 'high'
-                              ? 'bg-red-100 text-red-800'
+                              ? 'bg-red-100 dark:bg-red-950/80 text-red-800 dark:text-red-300'
                               : risk === 'medium'
-                              ? 'bg-amber-100 text-amber-800'
-                              : 'bg-emerald-100 text-emerald-800'
+                              ? 'bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300'
+                              : 'bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300'
                           }`}
                         >
                           <span>{risk === 'high' ? '🔴 High' : risk === 'medium' ? '🟡 Medium' : '🟢 Low'}</span>
                         </span>
                       </td>
 
-                      <td className="py-3.5 px-4 text-right font-mono font-extrabold text-slate-900">
+                      <td className="py-3.5 px-4 text-right font-mono font-extrabold text-slate-900 dark:text-white">
                         {formatCurrency(inv.total - (inv.paidAmount || 0))}
                       </td>
 
                       <td className="py-3.5 px-4 text-center">
-                        <span className="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 font-mono text-[11px] font-bold">
+                        <span className="px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono text-[11px] font-bold">
                           {inv.reminderCount} sent
                         </span>
                       </td>

@@ -94,13 +94,13 @@ export const PricingStore: React.FC<{ onSelectModule: (module: ActiveModule) => 
     <div className="space-y-6">
       {/* Header */}
       <div className="text-center max-w-2xl mx-auto py-4">
-        <span className="text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full bg-slate-900 text-emerald-400 border border-slate-700 inline-block mb-3">
+        <span className="text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full bg-slate-900 dark:bg-slate-800 text-emerald-400 border border-slate-700 dark:border-slate-600 inline-block mb-3">
           Pluggable Micro-SaaS Monetization
         </span>
-        <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+        <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
           Purchase Standalone Modules or the Complete Pro Suite
         </h1>
-        <p className="text-xs sm:text-sm text-slate-500 mt-2">
+        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-2">
           Every PayFlow module is an independent micro-product with complete feature isolation. Test each module in isolation below!
         </p>
       </div>
@@ -113,7 +113,7 @@ export const PricingStore: React.FC<{ onSelectModule: (module: ActiveModule) => 
           return (
             <div
               key={plan.id}
-              className={`rounded-3xl border p-6 flex flex-col justify-between transition-all bg-white shadow-sm hover:shadow-md ${
+              className={`rounded-3xl border p-6 flex flex-col justify-between transition-all bg-white dark:bg-slate-900 dark:border-slate-800 shadow-sm hover:shadow-md ${
                 plan.color
               } ${plan.popular ? 'relative' : ''}`}
             >
@@ -130,18 +130,18 @@ export const PricingStore: React.FC<{ onSelectModule: (module: ActiveModule) => 
                   </span>
                 </div>
 
-                <h3 className="font-extrabold text-base text-slate-900 mb-1">{plan.name}</h3>
-                <p className="text-[11px] text-slate-500 mb-4">{plan.desc}</p>
+                <h3 className="font-extrabold text-base text-slate-900 dark:text-white mb-1">{plan.name}</h3>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 mb-4">{plan.desc}</p>
 
-                <div className="flex items-baseline space-x-1 mb-6 pb-4 border-b border-slate-200">
-                  <span className="text-3xl font-black font-mono text-slate-900">{plan.price}</span>
-                  <span className="text-xs text-slate-500 font-medium">{plan.period}</span>
+                <div className="flex items-baseline space-x-1 mb-6 pb-4 border-b border-slate-200 dark:border-slate-800">
+                  <span className="text-3xl font-black font-mono text-slate-900 dark:text-white">{plan.price}</span>
+                  <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">{plan.period}</span>
                 </div>
 
-                <div className="space-y-2.5 mb-6 text-xs text-slate-700">
+                <div className="space-y-2.5 mb-6 text-xs text-slate-700 dark:text-slate-300">
                   {plan.features.map((f, idx) => (
                     <div key={idx} className="flex items-start space-x-2">
-                      <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                      <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                       <span>{f}</span>
                     </div>
                   ))}
@@ -155,10 +155,10 @@ export const PricingStore: React.FC<{ onSelectModule: (module: ActiveModule) => 
                 }}
                 className={`w-full py-2.5 rounded-xl font-bold text-xs transition-all flex items-center justify-center space-x-1.5 ${
                   isCurrent
-                    ? 'bg-slate-900 text-emerald-400 font-extrabold shadow-sm'
+                    ? 'bg-slate-900 dark:bg-emerald-600 text-emerald-400 dark:text-white font-extrabold shadow-sm'
                     : plan.popular
                     ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-glow-green'
-                    : 'bg-slate-100 hover:bg-slate-200 text-slate-800'
+                    : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200'
                 }`}
               >
                 <span>{isCurrent ? 'Active Mode' : 'Test This Module'}</span>

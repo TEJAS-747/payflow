@@ -121,23 +121,23 @@ export const UpiReconciliation: React.FC = () => {
       </div>
 
       {/* Reconciliation Feed Table */}
-      <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-        <div className="p-4 bg-slate-50 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden transition-colors">
+        <div className="p-4 bg-slate-50 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="flex items-center space-x-2">
-            <CreditCard className="w-4 h-4 text-rose-600" />
-            <h3 className="font-bold text-xs uppercase tracking-wider text-slate-800">
+            <CreditCard className="w-4 h-4 text-rose-600 dark:text-rose-400" />
+            <h3 className="font-bold text-xs uppercase tracking-wider text-slate-800 dark:text-slate-200">
               Incoming UPI Transactions ({upiTransactions.length})
             </h3>
           </div>
 
           <div className="relative w-full sm:w-72">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               placeholder="Search by UTR, payer, remark..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg outline-none focus:ring-2 focus:ring-rose-500"
+              className="w-full pl-9 pr-3 py-1.5 text-xs bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 rounded-lg outline-none focus:ring-2 focus:ring-rose-500"
             />
           </div>
         </div>
@@ -145,7 +145,7 @@ export const UpiReconciliation: React.FC = () => {
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="bg-slate-50 text-slate-600 border-b border-slate-200 font-bold uppercase tracking-wider text-[11px]">
+              <tr className="bg-slate-50 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 border-b border-slate-200 dark:border-slate-700 font-bold uppercase tracking-wider text-[11px]">
                 <th className="py-3 px-4">UTR & Date</th>
                 <th className="py-3 px-4">Payer & UPI VPA</th>
                 <th className="py-3 px-4 text-right">Amount Received</th>
@@ -155,42 +155,42 @@ export const UpiReconciliation: React.FC = () => {
                 <th className="py-3 px-4 text-right">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {filteredTransactions.map((tx) => {
                 const matchedInv = invoices.find((i) => i.id === tx.matchedInvoiceId);
 
                 return (
-                  <tr key={tx.id} className="hover:bg-slate-50/80 transition-colors">
+                  <tr key={tx.id} className="hover:bg-slate-50/80 dark:hover:bg-slate-800/60 transition-colors">
                     <td className="py-3.5 px-4">
-                      <div className="font-mono font-bold text-slate-900">{tx.utrNumber}</div>
-                      <div className="text-[11px] text-slate-400">
+                      <div className="font-mono font-bold text-slate-900 dark:text-white">{tx.utrNumber}</div>
+                      <div className="text-[11px] text-slate-400 dark:text-slate-500">
                         {formatDate(tx.date)} • {tx.time}
                       </div>
                     </td>
 
                     <td className="py-3.5 px-4">
-                      <div className="font-bold text-slate-800">{tx.payerName}</div>
-                      <div className="text-[11px] text-slate-400 font-mono">{tx.payerUpiId}</div>
-                      <div className="text-[10px] text-slate-400 truncate max-w-xs font-mono mt-0.5">
+                      <div className="font-bold text-slate-800 dark:text-slate-200">{tx.payerName}</div>
+                      <div className="text-[11px] text-slate-400 dark:text-slate-500 font-mono">{tx.payerUpiId}</div>
+                      <div className="text-[10px] text-slate-400 dark:text-slate-500 truncate max-w-xs font-mono mt-0.5">
                         "{tx.rawRemark}"
                       </div>
                     </td>
 
-                    <td className="py-3.5 px-4 text-right font-mono font-black text-slate-900 text-sm">
+                    <td className="py-3.5 px-4 text-right font-mono font-black text-slate-900 dark:text-white text-sm">
                       {formatCurrency(tx.amount)}
                     </td>
 
                     <td className="py-3.5 px-4">
                       {matchedInv ? (
                         <div>
-                          <span className="font-mono font-bold text-slate-800">{matchedInv.invoiceNumber}</span>
-                          <div className="text-[11px] text-slate-500">{matchedInv.clientName}</div>
-                          <div className="text-[10px] text-slate-400">
+                          <span className="font-mono font-bold text-slate-800 dark:text-slate-200">{matchedInv.invoiceNumber}</span>
+                          <div className="text-[11px] text-slate-500 dark:text-slate-400">{matchedInv.clientName}</div>
+                          <div className="text-[10px] text-slate-400 dark:text-slate-500">
                             Invoice Total: {formatCurrency(matchedInv.total)}
                           </div>
                         </div>
                       ) : (
-                        <span className="text-slate-400 italic">No direct match found</span>
+                        <span className="text-slate-400 dark:text-slate-500 italic">No direct match found</span>
                       )}
                     </td>
 
@@ -200,20 +200,20 @@ export const UpiReconciliation: React.FC = () => {
                           <span
                             className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
                               tx.matchScore >= 90
-                                ? 'bg-emerald-100 text-emerald-800'
+                                ? 'bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300'
                                 : tx.matchScore >= 70
-                                ? 'bg-amber-100 text-amber-800'
-                                : 'bg-slate-100 text-slate-700'
+                                ? 'bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300'
+                                : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
                             }`}
                           >
                             {tx.matchScore}% Match
                           </span>
-                          <span className="text-[10px] text-slate-400 block mt-0.5 truncate max-w-[120px]">
+                          <span className="text-[10px] text-slate-400 dark:text-slate-500 block mt-0.5 truncate max-w-[120px]">
                             {tx.matchReason}
                           </span>
                         </div>
                       ) : (
-                        <span className="text-slate-400">-</span>
+                        <span className="text-slate-400 dark:text-slate-500">-</span>
                       )}
                     </td>
 
@@ -221,14 +221,14 @@ export const UpiReconciliation: React.FC = () => {
                       <span
                         className={`inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold capitalize ${
                           tx.status === 'reconciled'
-                            ? 'bg-emerald-100 text-emerald-800'
-                            : 'bg-amber-100 text-amber-800'
+                            ? 'bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300'
+                            : 'bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300'
                         }`}
                       >
                         {tx.status === 'reconciled' ? (
-                          <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                          <CheckCircle2 className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
                         ) : (
-                          <RefreshCw className="w-3 h-3 text-amber-600 animate-spin" />
+                          <RefreshCw className="w-3 h-3 text-amber-600 dark:text-amber-400 animate-spin" />
                         )}
                         <span>{tx.status}</span>
                       </span>
@@ -244,7 +244,7 @@ export const UpiReconciliation: React.FC = () => {
                           <span>1-Click Reconcile</span>
                         </button>
                       ) : (
-                        <span className="text-slate-400 text-xs font-medium">Reconciled ✓</span>
+                        <span className="text-slate-400 dark:text-slate-500 text-xs font-medium">Reconciled ✓</span>
                       )}
                     </td>
                   </tr>
@@ -257,23 +257,23 @@ export const UpiReconciliation: React.FC = () => {
 
       {/* Import Statement Modal */}
       {isImportModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 border border-slate-100">
-            <h3 className="font-bold text-base text-slate-900 mb-1">Import UPI / Bank Statement</h3>
-            <p className="text-xs text-slate-500 mb-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 dark:bg-slate-950/80 backdrop-blur-sm animate-fadeIn">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl max-w-md w-full p-6 border border-slate-100 dark:border-slate-800 text-slate-900 dark:text-white">
+            <h3 className="font-bold text-base text-slate-900 dark:text-white mb-1">Import UPI / Bank Statement</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
               Import Google Pay, PhonePe, Paytm, or bank statement CSV logs.
             </p>
 
-            <div className="border-2 border-dashed border-rose-200 rounded-xl p-6 text-center bg-rose-50/50 mb-4">
-              <FileSpreadsheet className="w-8 h-8 text-rose-500 mx-auto mb-2" />
-              <p className="text-xs font-semibold text-slate-700">Drag & Drop Bank CSV here</p>
-              <p className="text-[11px] text-slate-400 mt-1">Supports HDFC, ICICI, SBI, Axis, and PhonePe exports</p>
+            <div className="border-2 border-dashed border-rose-200 dark:border-rose-900/60 rounded-xl p-6 text-center bg-rose-50/50 dark:bg-rose-950/30 mb-4">
+              <FileSpreadsheet className="w-8 h-8 text-rose-500 dark:text-rose-400 mx-auto mb-2" />
+              <p className="text-xs font-semibold text-slate-700 dark:text-slate-300">Drag & Drop Bank CSV here</p>
+              <p className="text-[11px] text-slate-400 dark:text-slate-500 mt-1">Supports HDFC, ICICI, SBI, Axis, and PhonePe exports</p>
             </div>
 
             <div className="flex items-center justify-between pt-2">
               <button
                 onClick={() => setIsImportModalOpen(false)}
-                className="px-4 py-2 border border-slate-300 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50"
+                className="px-4 py-2 border border-slate-300 dark:border-slate-700 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
               >
                 Cancel
               </button>

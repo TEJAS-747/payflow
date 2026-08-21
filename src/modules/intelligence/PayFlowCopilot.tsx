@@ -126,7 +126,7 @@ export const PayFlowCopilot: React.FC<{ onNavigateToInvoice?: (id: string) => vo
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200 shadow-sm flex flex-col h-[520px] overflow-hidden">
+    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col h-[520px] overflow-hidden transition-colors">
       {/* Copilot Header */}
       <div className="bg-gradient-to-r from-purple-900 via-indigo-900 to-slate-900 p-4 text-white flex items-center justify-between">
         <div className="flex items-center space-x-2.5">
@@ -146,7 +146,7 @@ export const PayFlowCopilot: React.FC<{ onNavigateToInvoice?: (id: string) => vo
       </div>
 
       {/* Messages Feed */}
-      <div className="flex-1 p-4 overflow-y-auto space-y-3 bg-slate-50/50">
+      <div className="flex-1 p-4 overflow-y-auto space-y-3 bg-slate-50/50 dark:bg-slate-950/60">
         {messages.map((msg) => (
           <div
             key={msg.id}
@@ -161,14 +161,14 @@ export const PayFlowCopilot: React.FC<{ onNavigateToInvoice?: (id: string) => vo
             <div
               className={`max-w-[85%] rounded-2xl p-3 text-xs leading-relaxed ${
                 msg.sender === 'user'
-                  ? 'bg-slate-900 text-white rounded-tr-none font-medium'
-                  : 'bg-white border border-slate-200 text-slate-800 rounded-tl-none shadow-sm whitespace-pre-wrap'
+                  ? 'bg-slate-900 dark:bg-purple-600 text-white rounded-tr-none font-medium'
+                  : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-100 rounded-tl-none shadow-sm whitespace-pre-wrap'
               }`}
             >
               <div>{msg.text}</div>
               <span
                 className={`text-[9px] block mt-1 text-right ${
-                  msg.sender === 'user' ? 'text-slate-400' : 'text-slate-400'
+                  msg.sender === 'user' ? 'text-slate-400 dark:text-purple-200' : 'text-slate-400 dark:text-slate-400'
                 }`}
               >
                 {msg.timestamp}
@@ -176,7 +176,7 @@ export const PayFlowCopilot: React.FC<{ onNavigateToInvoice?: (id: string) => vo
             </div>
 
             {msg.sender === 'user' && (
-              <div className="w-7 h-7 rounded-lg bg-slate-800 text-white flex items-center justify-center shrink-0 text-xs shadow-sm mt-0.5">
+              <div className="w-7 h-7 rounded-lg bg-slate-800 dark:bg-purple-700 text-white flex items-center justify-center shrink-0 text-xs shadow-sm mt-0.5">
                 <User className="w-4 h-4" />
               </div>
             )}
@@ -185,13 +185,13 @@ export const PayFlowCopilot: React.FC<{ onNavigateToInvoice?: (id: string) => vo
       </div>
 
       {/* Suggested Quick Prompts */}
-      <div className="px-4 py-2 bg-white border-t border-slate-100 flex items-center space-x-1.5 overflow-x-auto pb-2">
-        <span className="text-[10px] uppercase font-bold text-slate-400 shrink-0">Try:</span>
+      <div className="px-4 py-2 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 flex items-center space-x-1.5 overflow-x-auto pb-2">
+        <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-slate-500 shrink-0">Try:</span>
         {quickPrompts.map((prompt, idx) => (
           <button
             key={idx}
             onClick={() => handleQuery(prompt)}
-            className="px-2.5 py-1 rounded-full bg-purple-50 hover:bg-purple-100 border border-purple-200 text-purple-700 text-[11px] font-medium whitespace-nowrap transition-colors"
+            className="px-2.5 py-1 rounded-full bg-purple-50 dark:bg-purple-950/60 hover:bg-purple-100 dark:hover:bg-purple-900/60 border border-purple-200 dark:border-purple-800 text-purple-700 dark:text-purple-300 text-[11px] font-medium whitespace-nowrap transition-colors"
           >
             {prompt}
           </button>
@@ -204,14 +204,14 @@ export const PayFlowCopilot: React.FC<{ onNavigateToInvoice?: (id: string) => vo
           e.preventDefault();
           handleQuery(input);
         }}
-        className="p-3 bg-white border-t border-slate-200 flex items-center space-x-2"
+        className="p-3 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 flex items-center space-x-2"
       >
         <input
           type="text"
           placeholder="Ask PayFlow Copilot about your income, debts, overdue invoices..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          className="flex-1 px-3.5 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-purple-500 font-medium"
+          className="flex-1 px-3.5 py-2 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 rounded-xl outline-none focus:ring-2 focus:ring-purple-500 font-medium"
         />
         <button
           type="submit"

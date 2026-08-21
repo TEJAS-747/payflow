@@ -78,63 +78,63 @@ export const QuoteGenerator: React.FC<{ onNavigateToInvoices?: () => void }> = (
         {quotes.map((quote) => (
           <div
             key={quote.id}
-            className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
+            className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
           >
             <div>
               <div className="flex items-start justify-between mb-3">
                 <div>
                   <div className="flex items-center space-x-2 mb-1">
-                    <span className="font-mono font-bold text-xs text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded">
+                    <span className="font-mono font-bold text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-950/80 px-2 py-0.5 rounded">
                       {quote.quoteNumber}
                     </span>
                     <span
                       className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded-full ${
                         quote.status === 'converted'
-                          ? 'bg-emerald-100 text-emerald-800'
+                          ? 'bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300'
                           : quote.status === 'accepted'
-                          ? 'bg-blue-100 text-blue-800'
-                          : 'bg-slate-100 text-slate-700'
+                          ? 'bg-blue-100 dark:bg-blue-950/80 text-blue-800 dark:text-blue-300'
+                          : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
                       }`}
                     >
                       {quote.status}
                     </span>
                   </div>
-                  <h3 className="font-bold text-sm text-slate-900">{quote.title}</h3>
-                  <p className="text-xs text-slate-500">
-                    Client: <strong className="text-slate-800">{quote.clientName}</strong> ({quote.clientPhone})
+                  <h3 className="font-bold text-sm text-slate-900 dark:text-white">{quote.title}</h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
+                    Client: <strong className="text-slate-800 dark:text-slate-200">{quote.clientName}</strong> ({quote.clientPhone})
                   </p>
                 </div>
 
-                <span className="text-lg font-black font-mono text-slate-900">
+                <span className="text-lg font-black font-mono text-slate-900 dark:text-white">
                   {formatCurrency(quote.total)}
                 </span>
               </div>
 
-              <p className="text-xs text-slate-600 mb-4 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+              <p className="text-xs text-slate-600 dark:text-slate-300 mb-4 bg-slate-50 dark:bg-slate-800/80 p-2.5 rounded-xl border border-slate-100 dark:border-slate-700">
                 {quote.description}
               </p>
 
               {/* Items Summary */}
               <div className="space-y-1.5 mb-4">
-                <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400 block">
+                <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400 dark:text-slate-500 block">
                   Deliverables Breakdown ({quote.items.length})
                 </span>
                 {quote.items.map((item, idx) => (
-                  <div key={idx} className="flex justify-between text-xs text-slate-700">
+                  <div key={idx} className="flex justify-between text-xs text-slate-700 dark:text-slate-300">
                     <span className="truncate max-w-[70%]">• {item.description}</span>
-                    <span className="font-mono text-slate-600">{formatCurrency(item.amount)}</span>
+                    <span className="font-mono text-slate-600 dark:text-slate-400">{formatCurrency(item.amount)}</span>
                   </div>
                 ))}
               </div>
 
               {/* Timeline & Terms */}
-              <div className="text-[11px] text-slate-500 space-y-1 pb-3 border-b border-slate-100">
+              <div className="text-[11px] text-slate-500 dark:text-slate-400 space-y-1 pb-3 border-b border-slate-100 dark:border-slate-800">
                 <div className="flex items-center space-x-1.5">
-                  <Clock className="w-3.5 h-3.5 text-indigo-600" />
+                  <Clock className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
                   <span>Estimated Duration: <strong>{quote.estimatedDuration}</strong></span>
                 </div>
                 <div className="flex items-center space-x-1.5">
-                  <Calendar className="w-3.5 h-3.5 text-slate-400" />
+                  <Calendar className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
                   <span>Valid Until: {formatDate(quote.validUntil)}</span>
                 </div>
               </div>

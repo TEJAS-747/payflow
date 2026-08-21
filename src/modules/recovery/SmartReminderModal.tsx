@@ -109,14 +109,14 @@ Kindly confirm once paid.
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-900/70 backdrop-blur-sm overflow-y-auto animate-fadeIn">
-      <div className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl overflow-hidden border border-slate-100 my-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 dark:bg-slate-950/80 backdrop-blur-sm animate-fadeIn">
+      <div className="relative w-full max-w-xl bg-white dark:bg-slate-900 rounded-2xl shadow-2xl overflow-hidden border border-slate-100 dark:border-slate-800 text-slate-900 dark:text-white transition-colors">
         {/* Header */}
-        <div className="bg-gradient-to-r from-amber-600 to-orange-600 px-6 py-4 text-white flex items-center justify-between">
+        <div className="bg-gradient-to-r from-amber-600 via-orange-600 to-rose-600 px-6 py-4 text-white flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <Sparkles className="w-5 h-5 text-amber-200" />
             <div>
-              <h3 className="font-bold text-base">Smart Payment Chaser</h3>
+              <h3 className="font-bold text-base">Smart Payment Reminder Engine</h3>
               <p className="text-xs text-amber-100">
                 Chasing {invoice.invoiceNumber} • {formatCurrency(invoice.total)}
               </p>
@@ -134,11 +134,11 @@ Kindly confirm once paid.
         <div className="p-6 space-y-4">
           {/* Overdue Alert if overdue */}
           {overdueDays > 0 && (
-            <div className="flex items-center space-x-2.5 p-3 rounded-xl bg-red-50 border border-red-200 text-red-900 text-xs">
-              <ShieldAlert className="w-5 h-5 text-red-600 shrink-0" />
+            <div className="flex items-center space-x-2.5 p-3 rounded-xl bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-900/60 text-red-900 dark:text-red-200 text-xs">
+              <ShieldAlert className="w-5 h-5 text-red-600 dark:text-red-400 shrink-0" />
               <div>
                 <span className="font-bold block">Invoice is {overdueDays} days overdue</span>
-                <span className="text-[11px] text-red-700">
+                <span className="text-[11px] text-red-700 dark:text-red-300">
                   Recommended tone: <strong className="capitalize">{tone}</strong> with direct UPI payment link.
                 </span>
               </div>
@@ -147,7 +147,7 @@ Kindly confirm once paid.
 
           {/* Tone Presets Selector */}
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
               Select Tone / Escalation Stage
             </label>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -163,12 +163,12 @@ Kindly confirm once paid.
                   onClick={() => setTone(t.id as TonePreset)}
                   className={`p-2 rounded-xl text-left border transition-all text-xs ${
                     tone === t.id
-                      ? 'border-amber-500 bg-amber-50 text-amber-900 font-bold shadow-sm'
-                      : 'border-slate-200 hover:border-slate-300 text-slate-700 bg-slate-50'
+                      ? 'border-amber-500 bg-amber-50 dark:bg-amber-950/60 text-amber-900 dark:text-amber-200 font-bold shadow-sm'
+                      : 'border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/80'
                   }`}
                 >
                   <div className="font-semibold">{t.label}</div>
-                  <div className="text-[10px] text-slate-500 font-normal">{t.desc}</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400 font-normal">{t.desc}</div>
                 </button>
               ))}
             </div>
@@ -179,12 +179,12 @@ Kindly confirm once paid.
             <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">
               Delivery Channel
             </label>
-            <div className="flex bg-slate-100 p-1 rounded-xl text-xs font-semibold">
+            <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-semibold">
               <button
                 type="button"
                 onClick={() => setChannel('whatsapp')}
                 className={`flex-1 py-1.5 rounded-lg flex items-center justify-center space-x-1 transition-all ${
-                  channel === 'whatsapp' ? 'bg-emerald-600 text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'
+                  channel === 'whatsapp' ? 'bg-emerald-600 text-white shadow-sm' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 <MessageSquare className="w-3.5 h-3.5" />
@@ -194,7 +194,7 @@ Kindly confirm once paid.
                 type="button"
                 onClick={() => setChannel('sms')}
                 className={`flex-1 py-1.5 rounded-lg flex items-center justify-center space-x-1 transition-all ${
-                  channel === 'sms' ? 'bg-emerald-600 text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'
+                  channel === 'sms' ? 'bg-emerald-600 text-white shadow-sm' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 <Smartphone className="w-3.5 h-3.5" />
@@ -204,7 +204,7 @@ Kindly confirm once paid.
                 type="button"
                 onClick={() => setChannel('email')}
                 className={`flex-1 py-1.5 rounded-lg flex items-center justify-center space-x-1 transition-all ${
-                  channel === 'email' ? 'bg-emerald-600 text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'
+                  channel === 'email' ? 'bg-emerald-600 text-white shadow-sm' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 <Mail className="w-3.5 h-3.5" />
@@ -216,11 +216,11 @@ Kindly confirm once paid.
           {/* Message Preview & Editor */}
           <div>
             <div className="flex items-center justify-between mb-1.5">
-              <label className="text-xs font-semibold text-slate-700">Dynamic Message Copy</label>
+              <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">Dynamic Message Copy</label>
               <button
                 type="button"
                 onClick={handleCopy}
-                className="text-[11px] text-amber-700 hover:text-amber-800 font-medium flex items-center space-x-1"
+                className="text-[11px] text-amber-700 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-300 font-medium flex items-center space-x-1"
               >
                 {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                 <span>{copied ? 'Copied' : 'Copy'}</span>
@@ -230,12 +230,12 @@ Kindly confirm once paid.
               rows={6}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className="w-full p-3 text-xs bg-slate-50 border border-slate-200 rounded-xl font-mono text-slate-800 focus:bg-white focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
+              className="w-full p-3 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-slate-800 dark:text-slate-200 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none"
             />
           </div>
 
           {/* Reminder Stats */}
-          <div className="flex items-center justify-between text-[11px] text-slate-500 bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+          <div className="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-800/80 p-2.5 rounded-lg border border-slate-200 dark:border-slate-700">
             <span>Reminders sent so far: <strong>{invoice.reminderCount}</strong></span>
             {invoice.lastReminderSentAt && (
               <span>Last sent: {invoice.lastReminderSentAt}</span>
@@ -244,11 +244,11 @@ Kindly confirm once paid.
         </div>
 
         {/* Footer */}
-        <div className="bg-slate-50 px-6 py-4 border-t border-slate-100 flex items-center justify-between">
+        <div className="bg-slate-50 dark:bg-slate-800/90 px-6 py-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 border border-slate-300 rounded-xl text-slate-700 hover:bg-slate-100 text-xs font-semibold"
+            className="px-4 py-2 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 text-xs font-semibold"
           >
             Cancel
           </button>
