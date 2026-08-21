@@ -77,11 +77,17 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartApp, onOpenLang
       {/* Landing Header */}
       <header className="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center space-x-2.5">
+          <div className="flex items-center space-x-3">
             <div className="w-9 h-9 rounded-xl bg-emerald-600 flex items-center justify-center text-white font-black text-lg">
               PF
             </div>
             <span className="text-xl font-bold text-white tracking-tight">PayFlow</span>
+            
+            {/* Make in India Badge */}
+            <span className="hidden sm:inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-orange-500/20 via-slate-800 to-emerald-500/20 text-slate-200 text-[11px] font-bold border border-slate-700">
+              <span className="text-xs">🇮🇳</span>
+              <span>Make in India</span>
+            </span>
           </div>
 
           <div className="flex items-center space-x-3">
@@ -108,9 +114,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartApp, onOpenLang
 
       {/* Hero Section */}
       <section className="pt-16 pb-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center">
-        <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-800 text-emerald-400 text-xs font-semibold mb-6">
-          <ShieldCheck className="w-4 h-4 text-emerald-400" />
-          <span>Built for Indian Shopkeepers, Freelancers, Tutors & Vendors</span>
+        {/* Make in India Hero Pill */}
+        <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-orange-950/80 via-slate-900 to-emerald-950/80 border border-orange-500/40 text-orange-200 text-xs font-extrabold mb-6 shadow-sm">
+          <span className="text-base leading-none">🇮🇳</span>
+          <span>Make in India • Built for Indian Shopkeepers, Freelancers, Tutors & Vendors</span>
         </div>
 
         <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight max-w-4xl mx-auto">

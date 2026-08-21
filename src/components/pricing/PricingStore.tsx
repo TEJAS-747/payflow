@@ -218,43 +218,21 @@ export const PricingStore: React.FC<{ onSelectModule: (module: ActiveModule) => 
 
   return (
     <div className="space-y-6 max-w-6xl mx-auto">
-      {/* Artificial Purse Header Banner */}
+      {/* Header Banner */}
       <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-emerald-950 text-white rounded-2xl p-6 sm:p-8 shadow-md border border-slate-800 relative overflow-hidden">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
-          <div>
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-bold mb-3">
-              <Coins className="w-4 h-4 text-emerald-400" />
-              <span>Team Artificial Purse Budget • Hackathon Feature Market</span>
-            </div>
-
-            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-              Feature Marketplace (One-Time Purchase)
-            </h1>
-
-            <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl">
-              Buy individual standalone micro-features using your team's ₹10 Crore artificial purse. Every feature purchase grants <strong>lifetime ownership</strong> with zero monthly fees!
-            </p>
+        <div>
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-bold mb-3">
+            <Coins className="w-4 h-4 text-emerald-400" />
+            <span>Hackathon Feature Marketplace • One-Time Purchases</span>
           </div>
 
-          {/* Purse Balance Display Box */}
-          <div className="bg-slate-800/80 backdrop-blur-md p-4 rounded-xl border border-slate-700/80 shrink-0 text-right space-y-1">
-            <div className="text-[11px] text-slate-400 uppercase tracking-wider font-bold">
-              Purse Balance Remaining
-            </div>
-            <div className="text-2xl sm:text-3xl font-black font-mono text-emerald-400">
-              {formatCurrency(purseBalance)}
-            </div>
-            <div className="flex items-center justify-end space-x-2 text-[11px] text-slate-400 pt-1">
-              <span>Spent: {formatCurrency(totalSpent)}</span>
-              <button
-                onClick={handleResetPurse}
-                className="p-1 text-slate-400 hover:text-white transition-colors"
-                title="Reset Purse Balance to ₹10 Crore"
-              >
-                <RotateCcw className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          </div>
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+            Feature Catalog & Micro-SaaS Pricing
+          </h1>
+
+          <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl">
+            Explore and purchase individual standalone micro-features using your team's ₹10 Crore artificial purse. Every feature purchase grants <strong>lifetime ownership</strong> with zero monthly subscription fees!
+          </p>
         </div>
       </div>
 
