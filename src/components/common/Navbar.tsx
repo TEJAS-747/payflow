@@ -67,11 +67,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInvoiceModal, onOpenQuoteM
                 <div className="flex items-center space-x-2">
                   <span className="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">PayFlow</span>
                   <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
-                    Micro-SaaS
+                    Easy Hisaab / आसान हिसाब
                   </span>
                 </div>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400 hidden sm:block">
-                  WhatsApp Simplicity • Razorpay Payments • Zoho Invoicing
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 hidden sm:block font-medium">
+                  WhatsApp Share • Instant UPI QR • Easy Udhaar Manager (उधार मैनेजर)
                 </p>
               </div>
             </div>
@@ -81,10 +81,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInvoiceModal, onOpenQuoteM
               <button
                 onClick={() => setShowModuleMenu(!showModuleMenu)}
                 className="flex items-center space-x-2 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-medium transition-all"
-                title="Switch Standalone Micro-SaaS View"
+                title="Switch Standalone View"
               >
                 <Layers className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                <span>Active Mode:</span>
+                <span>Mode:</span>
                 <span className="font-semibold text-slate-900 dark:text-white">{moduleTitles[activeModuleFilter]?.title}</span>
                 <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-mono">
                   {moduleTitles[activeModuleFilter]?.price}
@@ -94,8 +94,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInvoiceModal, onOpenQuoteM
               {showModuleMenu && (
                 <div className="absolute top-full mt-2 w-72 bg-white dark:bg-slate-900 rounded-xl shadow-xl border border-slate-100 dark:border-slate-800 py-2 z-40">
                   <div className="px-3 py-1.5 border-b border-slate-100 dark:border-slate-800">
-                    <p className="text-[11px] font-bold uppercase text-slate-400 dark:text-slate-500">Micro-SaaS Architecture Selector</p>
-                    <p className="text-[11px] text-slate-500 dark:text-slate-400">Test each module in standalone isolation</p>
+                    <p className="text-[11px] font-bold uppercase text-slate-400 dark:text-slate-500">Feature Mode Selector</p>
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400">Select module to use or test independently</p>
                   </div>
                   {(Object.keys(moduleTitles) as (keyof typeof moduleTitles)[]).map((key) => (
                     <button
@@ -149,7 +149,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInvoiceModal, onOpenQuoteM
                   title="Send 1-Click Multi-Channel Reminders to all Overdue Clients"
                 >
                   <Bell className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 animate-bounce" />
-                  <span>Remind Overdue ({metrics.overdueInvoicesCount})</span>
+                  <span>Udhaar Remind ({metrics.overdueInvoicesCount})</span>
                 </button>
               )}
 
@@ -159,7 +159,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInvoiceModal, onOpenQuoteM
                 title="View My UPI Payment QR Code"
               >
                 <QrCode className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                <span className="hidden sm:inline">UPI QR</span>
+                <span className="hidden sm:inline">Mera QR</span>
               </button>
 
               <button
@@ -167,15 +167,15 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInvoiceModal, onOpenQuoteM
                 className="hidden sm:flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 border border-indigo-200 dark:border-indigo-800 text-xs font-semibold transition-all"
               >
                 <Sparkles className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
-                <span>AI Quote</span>
+                <span>+ Rate List</span>
               </button>
 
               <button
                 onClick={onOpenInvoiceModal}
-                className="flex items-center space-x-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 shadow-sm hover:shadow-glow-green text-xs font-semibold transition-all"
+                className="flex items-center space-x-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 shadow-sm hover:shadow-glow-green text-xs font-bold transition-all"
               >
                 <PlusCircle className="w-4 h-4" />
-                <span>+ Invoice</span>
+                <span>+ Naya Bill</span>
               </button>
 
               <button

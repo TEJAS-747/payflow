@@ -28,6 +28,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentTab, setCurrentTab }) =
   const navItems: {
     id: ActiveModule;
     label: string;
+    subLabel?: string;
     icon: React.ElementType;
     badge?: string | number;
     badgeColor?: string;
@@ -36,66 +37,74 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentTab, setCurrentTab }) =
   }[] = [
     {
       id: 'all',
-      label: 'Main Dashboard',
+      label: 'Dashboard',
+      subLabel: 'डैशबोर्ड Overview',
       icon: LayoutDashboard,
     },
     {
       id: 'invoicing',
-      label: 'Smart Invoicing',
+      label: 'Smart Bills',
+      subLabel: 'बिल & रसीद',
       icon: FileText,
       badge: invoices.length,
-      badgeColor: 'bg-blue-100 text-blue-700',
+      badgeColor: 'bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300',
       priceTag: '₹199/mo',
     },
     {
       id: 'recovery',
-      label: 'Payment Recovery',
+      label: 'Udhaar Recovery',
+      subLabel: 'उधार वसूली',
       icon: BellRing,
-      badge: metrics.overdueInvoicesCount > 0 ? `${metrics.overdueInvoicesCount} Overdue` : undefined,
-      badgeColor: 'bg-red-100 text-red-700 font-bold',
+      badge: metrics.overdueInvoicesCount > 0 ? `${metrics.overdueInvoicesCount} Udhaar` : undefined,
+      badgeColor: 'bg-red-100 dark:bg-red-950 text-red-700 dark:text-red-300 font-bold',
       priceTag: '₹249/mo',
     },
     {
       id: 'intelligence',
-      label: 'Income Intelligence AI',
+      label: 'Income AI',
+      subLabel: 'कमाई का हिसाब',
       icon: BrainCircuit,
-      badge: 'AI Copilot',
-      badgeColor: 'bg-purple-100 text-purple-700 font-bold',
+      badge: 'AI Assistant',
+      badgeColor: 'bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 font-bold',
       priceTag: '₹299/mo',
     },
     {
       id: 'quotes',
-      label: 'AI Quote Generator',
+      label: 'Rate Quotation',
+      subLabel: 'रेट लिस्ट (Quote)',
       icon: Sparkles,
       isExtension: true,
       badge: 'Ext',
-      badgeColor: 'bg-indigo-100 text-indigo-700',
+      badgeColor: 'bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300',
       priceTag: '₹149/mo',
     },
     {
       id: 'clients',
       label: 'Client CRM',
+      subLabel: 'ग्राहक खाता',
       icon: Users,
       isExtension: true,
       badge: clients.length,
-      badgeColor: 'bg-teal-100 text-teal-700',
+      badgeColor: 'bg-teal-100 dark:bg-teal-950 text-teal-700 dark:text-teal-300',
       priceTag: '₹149/mo',
     },
     {
       id: 'reconciliation',
-      label: 'UPI Reconciliation',
+      label: 'UPI Match',
+      subLabel: 'Bank हिसाब मिलान',
       icon: CreditCard,
       isExtension: true,
       badge: unreconciledCount > 0 ? `${unreconciledCount} Match` : undefined,
-      badgeColor: 'bg-amber-100 text-amber-800',
+      badgeColor: 'bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300',
       priceTag: '₹199/mo',
     },
     {
       id: 'pricing',
-      label: 'Pricing & Monetization',
+      label: 'Monetization Store',
+      subLabel: 'प्लान्स & pricing',
       icon: Tag,
       badge: 'Store',
-      badgeColor: 'bg-emerald-100 text-emerald-800 font-bold',
+      badgeColor: 'bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-bold',
     },
   ];
 
@@ -142,7 +151,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentTab, setCurrentTab }) =
                       isActive ? 'text-emerald-400 dark:text-white' : 'text-slate-400 dark:text-slate-500 group-hover:text-slate-700 dark:group-hover:text-slate-300'
                     }`}
                   />
-                  <span className="truncate">{item.label}</span>
+                  <div className="truncate text-left">
+                    <span className="truncate block font-semibold leading-tight">{item.label}</span>
+                    {item.subLabel && (
+                      <span className={`text-[10px] block truncate ${isActive ? 'text-emerald-200 dark:text-emerald-100' : 'text-slate-400 dark:text-slate-500'}`}>
+                        {item.subLabel}
+                      </span>
+                    )}
+                  </div>
                 </div>
 
                 <div className="flex items-center space-x-1.5 shrink-0">

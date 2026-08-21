@@ -65,13 +65,13 @@ export const InvoicingEngine: React.FC = () => {
           <div>
             <div className="flex items-center space-x-2 mb-1">
               <span className="text-[10px] uppercase font-bold tracking-widest px-2.5 py-0.5 rounded-full bg-blue-400/20 text-blue-200 border border-blue-400/30">
-                Standalone Module A
+                Easy Invoicing Engine
               </span>
-              <span className="text-xs text-blue-200 font-mono">Monetization: ₹199/mo</span>
+              <span className="text-xs text-blue-200 font-mono">Module 1</span>
             </div>
-            <h1 className="text-xl sm:text-2xl font-black tracking-tight">Smart Invoicing Engine</h1>
+            <h1 className="text-xl sm:text-2xl font-black tracking-tight">Smart Bill & Invoice Engine (आसान बिल मेकर)</h1>
             <p className="text-xs text-blue-100 mt-1 max-w-xl">
-              White-label dynamic invoice generation, tax/GST calculations, 4 PDF layouts, and 1-click WhatsApp delivery.
+              Grahak ke liye instant PDF bill banayein, GST & Tax calculate karein aur 1-click WhatsApp par bhejein.
             </p>
           </div>
 
@@ -83,26 +83,26 @@ export const InvoicingEngine: React.FC = () => {
             className="flex items-center space-x-2 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-xl text-xs shadow-glow-green transition-all self-start sm:self-auto"
           >
             <Plus className="w-4 h-4" />
-            <span>+ Create New Invoice</span>
+            <span>+ Create Naya Bill (+ नया बिल)</span>
           </button>
         </div>
 
         {/* Quick KPI Tiles */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-4 border-t border-blue-800/60">
           <div>
-            <span className="text-[11px] text-blue-200 block">Total Invoiced</span>
+            <span className="text-[11px] text-blue-200 block">Total Billed / कुल बिल</span>
             <span className="text-lg font-black font-mono">{formatCurrency(totalBilled)}</span>
           </div>
           <div>
-            <span className="text-[11px] text-blue-200 block">Collected (INR)</span>
+            <span className="text-[11px] text-blue-200 block">Collected / वसूल कमाई</span>
             <span className="text-lg font-black font-mono text-emerald-300">{formatCurrency(totalCollected)}</span>
           </div>
           <div>
-            <span className="text-[11px] text-blue-200 block">Pending Invoices</span>
+            <span className="text-[11px] text-blue-200 block">Pending / बकाया बिल</span>
             <span className="text-lg font-black font-mono text-amber-300">{pendingCount}</span>
           </div>
           <div>
-            <span className="text-[11px] text-blue-200 block">Overdue Invoices</span>
+            <span className="text-[11px] text-blue-200 block">Overdue / उधार overdue</span>
             <span className="text-lg font-black font-mono text-red-300">{overdueCount}</span>
           </div>
         </div>

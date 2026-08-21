@@ -117,7 +117,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           {/* 1. Total Income */}
           <div className="bg-slate-800/50 backdrop-blur-sm p-4 rounded-2xl border border-slate-700/60">
             <div className="flex items-center justify-between text-slate-400 text-xs mb-1 font-semibold">
-              <span>Total Income (MTD)</span>
+              <span>Total Kamai / कुल कमाई</span>
               <DollarSign className="w-4 h-4 text-emerald-400" />
             </div>
             <div className="text-2xl font-black font-mono text-emerald-400">
@@ -125,49 +125,49 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             </div>
             <div className="text-[11px] text-slate-400 mt-1 flex items-center space-x-1">
               <span className="text-emerald-400 font-bold">100% Direct UPI</span>
-              <span>• ₹0 gateway fees</span>
+              <span>• ₹0 gateway charges</span>
             </div>
           </div>
 
           {/* 2. Total Outstanding */}
           <div className="bg-slate-800/50 backdrop-blur-sm p-4 rounded-2xl border border-slate-700/60">
             <div className="flex items-center justify-between text-slate-400 text-xs mb-1 font-semibold">
-              <span>Outstanding Balance</span>
+              <span>Udhaar Baaki / कुल बकाया</span>
               <Clock className="w-4 h-4 text-amber-400" />
             </div>
             <div className="text-2xl font-black font-mono text-amber-300">
               {formatCurrency(metrics.totalOutstanding)}
             </div>
             <div className="text-[11px] text-slate-400 mt-1">
-              Across {metrics.pendingInvoicesCount + metrics.overdueInvoicesCount} open invoices
+              Across {metrics.pendingInvoicesCount + metrics.overdueInvoicesCount} open bills
             </div>
           </div>
 
           {/* 3. Overdue Amount */}
           <div className="bg-slate-800/50 backdrop-blur-sm p-4 rounded-2xl border border-slate-700/60">
             <div className="flex items-center justify-between text-slate-400 text-xs mb-1 font-semibold">
-              <span>Overdue Amount</span>
+              <span>Atka Hua Paisa / 7+ दिन से बकाया</span>
               <AlertTriangle className="w-4 h-4 text-red-400" />
             </div>
             <div className="text-2xl font-black font-mono text-red-400">
               {formatCurrency(metrics.totalOverdue)}
             </div>
             <div className="text-[11px] text-red-300 mt-1 font-semibold">
-              {metrics.overdueInvoicesCount} invoices need chaser
+              {metrics.overdueInvoicesCount} bills need reminder / तकादा
             </div>
           </div>
 
           {/* 4. Due Soon */}
           <div className="bg-slate-800/50 backdrop-blur-sm p-4 rounded-2xl border border-slate-700/60">
             <div className="flex items-center justify-between text-slate-400 text-xs mb-1 font-semibold">
-              <span>Due Soon (3 Days)</span>
+              <span>Agle 3 Din Mein Due</span>
               <CheckCircle2 className="w-4 h-4 text-cyan-400" />
             </div>
             <div className="text-2xl font-black font-mono text-cyan-300">
               {formatCurrency(metrics.totalDueSoon)}
             </div>
             <div className="text-[11px] text-slate-400 mt-1">
-              Auto-reminders scheduled
+              Auto WhatsApp ready
             </div>
           </div>
         </div>
@@ -182,10 +182,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             </div>
             <div>
               <h4 className="font-extrabold text-sm">
-                Action Required: {formatCurrency(metrics.totalOverdue)} is currently overdue!
+                Dhyan Dein: {formatCurrency(metrics.totalOverdue)} udhaar overdue hai!
               </h4>
               <p className="text-xs text-red-100 mt-0.5">
-                {metrics.overdueInvoicesCount} invoices are past due. Launch 1-click WhatsApp chasers to recover funds today.
+                {metrics.overdueInvoicesCount} bill overdue hain. 1-Click WhatsApp reminder (तकादा) bhej kar paisa vasool karein.
               </p>
             </div>
           </div>
@@ -195,7 +195,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               onClick={handleBatchRemind}
               className="px-4 py-2 bg-white text-red-700 hover:bg-red-50 font-bold rounded-xl text-xs shadow-sm transition-all whitespace-nowrap"
             >
-              ⚡ Remind Overdue Clients
+              ⚡ All Udhaar Reminders Bhejo
             </button>
             <button
               onClick={() => onNavigateTab('recovery')}

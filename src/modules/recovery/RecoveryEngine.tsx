@@ -59,15 +59,15 @@ export const RecoveryEngine: React.FC = () => {
           <div>
             <div className="flex items-center space-x-2 mb-1">
               <span className="text-[10px] uppercase font-bold tracking-widest px-2.5 py-0.5 rounded-full bg-amber-400/20 text-amber-200 border border-amber-400/30">
-                Standalone Module B
+                Udhaar Manager
               </span>
-              <span className="text-xs text-amber-200 font-mono">Monetization: ₹249/mo</span>
+              <span className="text-xs text-amber-200 font-mono">Module 2</span>
             </div>
             <h1 className="text-xl sm:text-2xl font-black tracking-tight">
-              "Get Paid" Payment Recovery Engine
+              Payment Recovery & Reminders (उधार वसूली)
             </h1>
             <p className="text-xs text-amber-100 mt-1 max-w-xl">
-              Automated overdue detection, multi-tone escalation schedules, and 1-click WhatsApp payment recovery.
+              Udhaar waale bills ko automatic detect karein aur 1-click WhatsApp takada (reminder) bhej kar paise vasool karein.
             </p>
           </div>
 
@@ -77,7 +77,7 @@ export const RecoveryEngine: React.FC = () => {
             className="flex items-center space-x-2 px-4 py-2.5 bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-300 hover:to-orange-300 text-slate-950 font-bold rounded-xl text-xs shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed self-start sm:self-auto"
           >
             <Zap className="w-4 h-4 fill-slate-950" />
-            <span>⚡ Remind All Overdue ({metrics.overdueInvoicesCount})</span>
+            <span>⚡ Remind All Overdue Clients ({metrics.overdueInvoicesCount})</span>
           </button>
         </div>
 
@@ -94,7 +94,7 @@ export const RecoveryEngine: React.FC = () => {
         <div className="bg-gradient-to-br from-red-500 to-rose-600 rounded-2xl p-5 text-white shadow-md relative overflow-hidden">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-bold uppercase tracking-wider text-red-100">
-              Money You Could Be Missing
+              Atka Hua Paisa / Total Overdue
             </span>
             <AlertTriangle className="w-5 h-5 text-red-200" />
           </div>

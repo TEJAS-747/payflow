@@ -36,13 +36,13 @@ export const QuoteGenerator: React.FC<{ onNavigateToInvoices?: () => void }> = (
           <div>
             <div className="flex items-center space-x-2 mb-1">
               <span className="text-[10px] uppercase font-bold tracking-widest px-2.5 py-0.5 rounded-full bg-indigo-400/20 text-indigo-200 border border-indigo-400/30">
-                Standalone Extension 1
+                Rate List & Quotes
               </span>
-              <span className="text-xs text-indigo-200 font-mono">Monetization: ₹149/mo</span>
+              <span className="text-xs text-indigo-200 font-mono">Extension 1</span>
             </div>
-            <h1 className="text-xl sm:text-2xl font-black tracking-tight">Smart AI Quote Generator</h1>
+            <h1 className="text-xl sm:text-2xl font-black tracking-tight">Rate List & AI Quotation (रेट लिस्ट & कोटेशन)</h1>
             <p className="text-xs text-indigo-200 mt-1 max-w-xl">
-              Turn natural language prompts into professional cost estimates, milestones, and 1-click converted invoices.
+              Aasaan bhasha mein kaam ki details likhein, auto rate estimate banayein aur 1-click invoice mein badlein.
             </p>
           </div>
 
@@ -51,7 +51,7 @@ export const QuoteGenerator: React.FC<{ onNavigateToInvoices?: () => void }> = (
             className="flex items-center space-x-2 px-4 py-2.5 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-400 hover:to-purple-400 text-white font-bold rounded-xl text-xs shadow-md transition-all self-start sm:self-auto"
           >
             <Sparkles className="w-4 h-4 text-indigo-200" />
-            <span>+ Generate AI Quote</span>
+            <span>+ Naya Quote / Rate List</span>
           </button>
         </div>
 

@@ -80,15 +80,15 @@ export const UpiReconciliation: React.FC = () => {
           <div>
             <div className="flex items-center space-x-2 mb-1">
               <span className="text-[10px] uppercase font-bold tracking-widest px-2.5 py-0.5 rounded-full bg-rose-400/20 text-rose-200 border border-rose-400/30">
-                Standalone Extension 3
+                UPI Bank Match
               </span>
-              <span className="text-xs text-rose-200 font-mono">Monetization: ₹199/mo</span>
+              <span className="text-xs text-rose-200 font-mono">Extension 3</span>
             </div>
             <h1 className="text-xl sm:text-2xl font-black tracking-tight">
-              UPI Payment Reconciliation Engine
+              UPI Payment Auto-Match (बैंक से हिसाब मिलाओ)
             </h1>
             <p className="text-xs text-rose-200 mt-1 max-w-xl">
-              Fuzzy-match bank statement feeds (PhonePe, GPay, Paytm) with open pending invoices for 1-click ledger sync.
+              PhonePe, GPay, Paytm aur Bank statement se aane wale UPI payments ko open bills se 1-click mein milayein.
             </p>
           </div>
 
@@ -98,7 +98,7 @@ export const UpiReconciliation: React.FC = () => {
               className="flex items-center space-x-1.5 px-3.5 py-2.5 bg-rose-500/30 hover:bg-rose-500/40 text-rose-100 border border-rose-400/40 rounded-xl text-xs font-semibold transition-all"
             >
               <Upload className="w-4 h-4" />
-              <span>Import Statement</span>
+              <span>Import CSV / बैंक स्टेटमेंट</span>
             </button>
 
             <button
@@ -107,7 +107,7 @@ export const UpiReconciliation: React.FC = () => {
               className="flex items-center space-x-1.5 px-4 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-bold rounded-xl text-xs shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Zap className="w-4 h-4 fill-slate-950" />
-              <span>Auto-Reconcile ({highConfidenceCount})</span>
+              <span>⚡ Auto-Match Hisaab ({highConfidenceCount})</span>
             </button>
           </div>
         </div>

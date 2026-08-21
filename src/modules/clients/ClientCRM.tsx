@@ -51,13 +51,13 @@ export const ClientCRM: React.FC<{ onOpenInvoiceForClient?: (client: Client) => 
           <div>
             <div className="flex items-center space-x-2 mb-1">
               <span className="text-[10px] uppercase font-bold tracking-widest px-2.5 py-0.5 rounded-full bg-teal-400/20 text-teal-200 border border-teal-400/30">
-                Standalone Extension 2
+                Grahak Khaata
               </span>
-              <span className="text-xs text-teal-200 font-mono">Monetization: ₹149/mo</span>
+              <span className="text-xs text-teal-200 font-mono">Extension 2</span>
             </div>
-            <h1 className="text-xl sm:text-2xl font-black tracking-tight">Independent Client CRM</h1>
+            <h1 className="text-xl sm:text-2xl font-black tracking-tight">Grahak Directory & Khaata Book (ग्राहक खाता)</h1>
             <p className="text-xs text-teal-200 mt-1 max-w-xl">
-              Manage client directory, payment reliability ratings, lifetime ledgers, and 1-click WhatsApp outreach.
+              Sabhi grahakon ki list, phone number, WhatsApp contact aur unka purana hisaab ledger ek jagah dekhein.
             </p>
           </div>
 
@@ -69,7 +69,7 @@ export const ClientCRM: React.FC<{ onOpenInvoiceForClient?: (client: Client) => 
             className="flex items-center space-x-2 px-4 py-2.5 bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold rounded-xl text-xs shadow-md transition-all self-start sm:self-auto"
           >
             <Plus className="w-4 h-4" />
-            <span>+ Add New Client</span>
+            <span>+ Naya Grahak Jodein (+ नया ग्राहक)</span>
           </button>
         </div>
 

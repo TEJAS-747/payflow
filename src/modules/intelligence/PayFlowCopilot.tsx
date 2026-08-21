@@ -38,11 +38,11 @@ export const PayFlowCopilot: React.FC<{ onNavigateToInvoice?: (id: string) => vo
   ]);
 
   const quickPrompts = [
-    'Who owes me the most money?',
-    'Which invoices are overdue?',
-    'Draft a polite reminder for Rahul',
-    'What was my best income month?',
-    'How can I speed up payment collection?',
+    'Rahul Ji ka udhaar kitna baaki hai?',
+    'Kis grahak ka bill overdue hai?',
+    'Iss mahine ki total kamai kitni hui?',
+    'Sabse jyada udhaar kis grahak par hai?',
+    'Draft a polite WhatsApp reminder for Rahul',
   ];
 
   const handleQuery = (queryText: string) => {
@@ -63,55 +63,57 @@ export const PayFlowCopilot: React.FC<{ onNavigateToInvoice?: (id: string) => vo
       let aiResponse = '';
       const lower = queryText.toLowerCase();
 
-      if (lower.includes('who owes') || lower.includes('most money') || lower.includes('highest debtor')) {
+      if (lower.includes('who owes') || lower.includes('most money') || lower.includes('jyada udhaar') || lower.includes('bada grahak')) {
         const debtors = clients
           .filter((c) => c.outstandingBalance > 0)
           .sort((a, b) => b.outstandingBalance - a.outstandingBalance);
 
         if (debtors.length > 0) {
           const top = debtors[0];
-          aiResponse = `📊 **Top Outstanding Client:**\n\n**${top.name}** currently owes the most with an outstanding balance of **${formatCurrency(top.outstandingBalance)}**.\n\n` +
+          aiResponse = `📊 **Top Outstanding Client / सबसे बड़ा बकाया:**\n\n**${top.name}** par abhi sabse jyada **${formatCurrency(top.outstandingBalance)}** baaki hai.\n\n` +
             debtors.map((d, i) => `${i + 1}. **${d.name}**: ${formatCurrency(d.outstandingBalance)} (Risk: ${d.riskRating.toUpperCase()})`).join('\n') +
-            `\n\n💡 *Action Recommendation:* Send a WhatsApp chaser to ${top.name} with your instant UPI link \`${userProfile.upiId}\`.`;
+            `\n\n💡 *Sudhaav:* ${top.name} ko WhatsApp par instant UPI link \`${userProfile.upiId}\` ke saath reminder bhejein.`;
         } else {
-          aiResponse = '🎉 Great news! None of your clients currently have outstanding unpaid balances.';
+          aiResponse = '🎉 Badhiya! Kisi bhi grahak ka udhaar baaki nahi hai.';
         }
-      } else if (lower.includes('overdue') || lower.includes('late')) {
+      } else if (lower.includes('overdue') || lower.includes('late') || lower.includes('atka') || lower.includes('overdue bill')) {
         const overdueList = invoices.filter((i) => i.status === 'overdue');
         if (overdueList.length > 0) {
-          aiResponse = `⚠️ **Overdue Invoices (${overdueList.length}):**\n\n` +
+          aiResponse = `⚠️ **Overdue Bills / अटका हुआ पैसा (${overdueList.length}):**\n\n` +
             overdueList
               .map(
                 (inv) =>
-                  `• **${inv.invoiceNumber}** — ${inv.clientName}: **${formatCurrency(inv.total)}** (Due: ${formatDate(inv.dueDate)})`
+                  `• **${inv.invoiceNumber}** — ${inv.clientName}: **${formatCurrency(inv.total)}** (Due Date: ${formatDate(inv.dueDate)})`
               )
               .join('\n') +
-            `\n\nTotal Overdue: **${formatCurrency(metrics.totalOverdue)}**\nRecommended Tone: *Firm* or *Urgent* escalation.`;
+            `\n\nTotal Overdue: **${formatCurrency(metrics.totalOverdue)}**\nWhatsApp takada (reminder) bhej kar turant settle karein.`;
         } else {
-          aiResponse = '✅ All current invoices are either paid or on-time within their due dates.';
+          aiResponse = '✅ Sabhi bills time par paid hain ya due date ke andar hain.';
         }
-      } else if (lower.includes('reminder') || lower.includes('rahul') || lower.includes('draft')) {
+      } else if (lower.includes('reminder') || lower.includes('rahul') || lower.includes('draft') || lower.includes('takaada')) {
         const rahulInv = invoices.find((i) => i.clientName.toLowerCase().includes('rahul'));
         const amt = rahulInv ? formatCurrency(rahulInv.total) : '₹4,500';
         const invNum = rahulInv ? rahulInv.invoiceNumber : '#INV-1024';
 
-        aiResponse = `📝 **Drafted WhatsApp Reminder for Rahul Sharma:**\n\n` +
-          `*"Hi Rahul! Hope you're having a productive week. Just a quick friendly heads-up that invoice ${invNum} for ${amt} is due. You can clear it via instant UPI to: ${userProfile.upiId}. Thank you!"*\n\n` +
-          `📱 *You can copy this directly or launch 1-click WhatsApp chaser.*`;
-      } else if (lower.includes('best month') || lower.includes('highest income') || lower.includes('revenue')) {
-        aiResponse = `🏆 **Income Performance Summary:**\n\nYour highest collection month is **August 2026** with **${formatCurrency(metrics.totalIncome)}** collected MTD, followed by **June 2026 (₹31,000)**.\n\n` +
-          `• **Top Earning Skill:** Web Development & UI/UX Design\n• **Collection Speed:** 4.2 days average settlement`;
+        aiResponse = `📝 **Rahul Ji Ke Liye Ready WhatsApp Message:**\n\n` +
+          `*"Namaste Rahul Ji! Aapka bill ${invNum} (${amt}) baaki hai. Aap instant UPI dwara yahan pay kar sakte hain: ${userProfile.upiId}. Dhanyawad!"*\n\n` +
+          `📱 *Aap 1-Click WhatsApp Reminder button click karke direct bhej sakte hain.*`;
+      } else if (lower.includes('best month') || lower.includes('highest income') || lower.includes('revenue') || lower.includes('kamai')) {
+        aiResponse = `🏆 **Income & Kamai Report / कमाई का हिसाब:**\n\nIs mahine (August 2026) aapki kul kamai **${formatCurrency(metrics.totalIncome)}** hui hai (100% Direct UPI).\n\n` +
+          `• **Total Collected:** ${formatCurrency(metrics.totalIncome)}\n` +
+          `• **Udhaar Balance:** ${formatCurrency(metrics.totalOutstanding)}\n` +
+          `• **Collection Speed:** 4.2 din average settlement`;
       } else if (lower.includes('speed') || lower.includes('improve') || lower.includes('advice') || lower.includes('tips')) {
-        aiResponse = `🚀 **3 High-Impact Cash Flow Optimization Strategies:**\n\n` +
-          `1. **Require 50% Upfront Advance:** On quotes above ₹10,000, enforce milestone advance payments via the AI Quote Generator.\n` +
-          `2. **Leverage WhatsApp Deep Links:** Invoices shared with instant UPI QR codes get settled 3.4x faster than email invoices.\n` +
-          `3. **Set 3-Day Automated Pre-Due Reminders:** 84% of clients pay on time when reminded 3 days before the due date.`;
+        aiResponse = `🚀 **3 Aasaan Tarike Fast Payment lene ke:**\n\n` +
+          `1. **Bill ke saath UPI QR share karein:** Client bill dekhte hi GPay/PhonePe se 1-click payment kar dete hain.\n` +
+          `2. **Due Date se 3 din pehle reminder bhejein:** 84% grahak time par pay kar dete hain.\n` +
+          `3. **AI Rate Quote se advance lein:** Bade kaam ke liye 50% advance quote bhej kar kaam shuru karein.`;
       } else {
-        aiResponse = `🤖 **PayFlow AI Analysis:**\n\nBased on your query "${queryText}":\n` +
+        aiResponse = `🤖 **PayFlow AI Assistant:**\n\nAapke sawal "${queryText}" ke aadhar par live ledger report:\n` +
           `• Total Billed: ${formatCurrency(metrics.totalIncome + metrics.totalOutstanding)}\n` +
           `• Active Clients: ${clients.length}\n` +
-          `• Collection Health Score: **${metrics.collectionRate}%** (Excellent)\n\n` +
-          `Feel free to ask for specific client reports, reminder drafts, or revenue forecasts!`;
+          `• Collection Health: **${metrics.collectionRate}%** (Badhiya)\n\n` +
+          `Aap grahak report, udhaar list, ya WhatsApp message draft karne ko keh sakte hain!`;
       }
 
       const aiMsg: Message = {
@@ -208,7 +210,7 @@ export const PayFlowCopilot: React.FC<{ onNavigateToInvoice?: (id: string) => vo
       >
         <input
           type="text"
-          placeholder="Ask PayFlow Copilot about your income, debts, overdue invoices..."
+          placeholder="Ask in Hindi or English (e.g. Rahul ji ka udhaar kitna baaki hai)..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
           className="flex-1 px-3.5 py-2 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 rounded-xl outline-none focus:ring-2 focus:ring-purple-500 font-medium"
