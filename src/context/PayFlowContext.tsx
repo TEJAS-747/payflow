@@ -18,11 +18,17 @@ import {
   initialUpiTransactions,
   initialReminderLogs,
 } from '../data/seedData';
-import confetti from 'canvas-confetti';
+import type { LanguageCode } from '../utils/translations';
+import { translations } from '../utils/translations';
 
 interface PayFlowContextType {
   userProfile: UserProfile;
   updateUserProfile: (profile: Partial<UserProfile>) => void;
+
+  // Language & Translation Engine
+  selectedLanguage: LanguageCode;
+  setSelectedLanguage: (lang: LanguageCode) => void;
+  t: (key: string) => string;
 
   clients: Client[];
   addClient: (client: Omit<Client, 'id' | 'createdAt' | 'totalBilled' | 'totalPaid' | 'outstandingBalance' | 'riskRating' | 'paymentReliabilityScore'>) => Client;
@@ -102,6 +108,21 @@ const PayFlowContext = createContext<PayFlowContextType | undefined>(undefined);
 const LOCAL_STORAGE_KEY = 'payflow_state_v1';
 
 export const PayFlowProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [selectedLanguage, setSelectedLanguageState] = useState<LanguageCode>(() => {
+    const saved = localStorage.getItem(`${LOCAL_STORAGE_KEY}_lang`);
+    return (saved as LanguageCode) || 'hi';
+  });
+
+  const setSelectedLanguage = (lang: LanguageCode) => {
+    setSelectedLanguageState(lang);
+    localStorage.setItem(`${LOCAL_STORAGE_KEY}_lang`, lang);
+  };
+
+  const t = (key: string): string => {
+    const langDict = translations[selectedLanguage] || translations['en'];
+    return langDict[key] || translations['en'][key] || key;
+  };
+
   const [userProfile, setUserProfileState] = useState<UserProfile>(() => {
     const saved = localStorage.getItem(`${LOCAL_STORAGE_KEY}_profile`);
     return saved ? JSON.parse(saved) : initialUserProfile;
@@ -584,6 +605,9 @@ export const PayFlowProvider: React.FC<{ children: React.ReactNode }> = ({ child
       value={{
         userProfile,
         updateUserProfile,
+        selectedLanguage,
+        setSelectedLanguage,
+        t,
         clients,
         addClient,
         updateClient,

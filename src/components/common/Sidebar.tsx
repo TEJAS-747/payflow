@@ -21,7 +21,7 @@ interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ currentTab, setCurrentTab }) => {
-  const { userProfile, metrics, upiTransactions, clients, invoices } = usePayFlow();
+  const { userProfile, metrics, upiTransactions, clients, invoices, t } = usePayFlow();
 
   const unreconciledCount = upiTransactions.filter((t) => t.status === 'unreconciled').length;
 
@@ -37,14 +37,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentTab, setCurrentTab }) =
   }[] = [
     {
       id: 'all',
-      label: 'Dashboard',
-      subLabel: 'डैशबोर्ड Overview',
+      label: t('dashboard'),
+      subLabel: t('dashboardSub'),
       icon: LayoutDashboard,
     },
     {
       id: 'invoicing',
-      label: 'Smart Bills',
-      subLabel: 'बिल & रसीद',
+      label: t('smartBills'),
+      subLabel: t('billsSub'),
       icon: FileText,
       badge: invoices.length,
       badgeColor: 'bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300',
@@ -52,8 +52,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentTab, setCurrentTab }) =
     },
     {
       id: 'recovery',
-      label: 'Udhaar Recovery',
-      subLabel: 'उधार वसूली',
+      label: t('udhaarRecovery'),
+      subLabel: t('recoverySub'),
       icon: BellRing,
       badge: metrics.overdueInvoicesCount > 0 ? `${metrics.overdueInvoicesCount} Udhaar` : undefined,
       badgeColor: 'bg-red-100 dark:bg-red-950 text-red-700 dark:text-red-300 font-bold',
@@ -61,8 +61,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentTab, setCurrentTab }) =
     },
     {
       id: 'intelligence',
-      label: 'Income AI',
-      subLabel: 'कमाई का हिसाब',
+      label: t('incomeAi'),
+      subLabel: t('incomeAiSub'),
       icon: BrainCircuit,
       badge: 'AI Assistant',
       badgeColor: 'bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 font-bold',
@@ -70,8 +70,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentTab, setCurrentTab }) =
     },
     {
       id: 'quotes',
-      label: 'Rate Quotation',
-      subLabel: 'रेट लिस्ट (Quote)',
+      label: t('rateQuotation'),
+      subLabel: t('rateSub'),
       icon: Sparkles,
       isExtension: true,
       badge: 'Ext',
@@ -80,8 +80,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentTab, setCurrentTab }) =
     },
     {
       id: 'clients',
-      label: 'Client CRM',
-      subLabel: 'ग्राहक खाता',
+      label: t('clientCrm'),
+      subLabel: t('crmSub'),
       icon: Users,
       isExtension: true,
       badge: clients.length,
@@ -90,8 +90,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentTab, setCurrentTab }) =
     },
     {
       id: 'reconciliation',
-      label: 'UPI Match',
-      subLabel: 'Bank हिसाब मिलान',
+      label: t('upiMatch'),
+      subLabel: t('upiSub'),
       icon: CreditCard,
       isExtension: true,
       badge: unreconciledCount > 0 ? `${unreconciledCount} Match` : undefined,
@@ -100,8 +100,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentTab, setCurrentTab }) =
     },
     {
       id: 'pricing',
-      label: 'Monetization Store',
-      subLabel: 'प्लान्स & pricing',
+      label: t('monetizationStore'),
+      subLabel: t('pricingSub'),
       icon: Tag,
       badge: 'Store',
       badgeColor: 'bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-bold',

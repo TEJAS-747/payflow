@@ -15,16 +15,20 @@ import { HackathonDemoBar } from './components/demo/HackathonDemoBar';
 import { InvoiceBuilderModal } from './modules/invoicing/InvoiceBuilderModal';
 import { QuoteGeneratorModal } from './modules/quotes/QuoteGeneratorModal';
 import { OnboardingModal } from './components/onboarding/OnboardingModal';
+import { LandingPage } from './components/landing/LandingPage';
+import { LanguageSelectModal } from './components/common/LanguageSelectModal';
 import { LayoutDashboard, FileText, BellRing, Users, Plus, X } from 'lucide-react';
 
 const PayFlowContent: React.FC = () => {
-  const { activeModuleFilter, setActiveModuleFilter } = usePayFlow();
+  const { activeModuleFilter, setActiveModuleFilter, t } = usePayFlow();
 
+  const [viewMode, setViewMode] = useState<'landing' | 'app'>('landing');
   const [currentTab, setCurrentTab] = useState<ActiveModule>('all');
   const [isInvoiceModalOpen, setIsInvoiceModalOpen] = useState(false);
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const [isOnboardingOpen, setIsOnboardingOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLanguageModalOpen, setIsLanguageModalOpen] = useState(false);
 
   // Sync with active module filter if changed from navbar switcher
   React.useEffect(() => {
@@ -67,6 +71,28 @@ const PayFlowContent: React.FC = () => {
     }
   };
 
+  // If in Landing Page mode, render Landing Page
+  if (viewMode === 'landing') {
+    return (
+      <>
+        <LandingPage
+          onStartApp={() => setIsLanguageModalOpen(true)}
+          onOpenLanguageModal={() => setIsLanguageModalOpen(true)}
+        />
+        {isLanguageModalOpen && (
+          <LanguageSelectModal
+            isOpen={isLanguageModalOpen}
+            onClose={() => setIsLanguageModalOpen(false)}
+            onConfirm={() => {
+              setIsLanguageModalOpen(false);
+              setViewMode('app');
+            }}
+          />
+        )}
+      </>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col font-sans transition-colors duration-200">
       {/* Top Navigation */}
@@ -74,6 +100,8 @@ const PayFlowContent: React.FC = () => {
         onOpenInvoiceModal={() => setIsInvoiceModalOpen(true)}
         onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
         onToggleMobileMenu={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        onOpenLandingPage={() => setViewMode('landing')}
+        onOpenLanguageModal={() => setIsLanguageModalOpen(true)}
       />
 
       {/* Slide-out Mobile Navigation Drawer Overlay (for Phones) */}
@@ -189,6 +217,14 @@ const PayFlowContent: React.FC = () => {
           onClose={() => setIsQuoteModalOpen(false)}
           onSuccess={() => handleTabChange('quotes')}
           onConvertToInvoiceImmediately={() => handleTabChange('invoicing')}
+        />
+      )}
+
+      {isLanguageModalOpen && (
+        <LanguageSelectModal
+          isOpen={isLanguageModalOpen}
+          onClose={() => setIsLanguageModalOpen(false)}
+          onConfirm={() => setIsLanguageModalOpen(false)}
         />
       )}
 

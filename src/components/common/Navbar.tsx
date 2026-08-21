@@ -13,6 +13,8 @@ import {
   Sun,
   Moon,
   Menu,
+  Globe,
+  Home,
 } from 'lucide-react';
 import { UpiQrModal } from './UpiQrModal';
 
@@ -20,12 +22,16 @@ interface NavbarProps {
   onOpenInvoiceModal: () => void;
   onOpenQuoteModal: () => void;
   onToggleMobileMenu?: () => void;
+  onOpenLandingPage?: () => void;
+  onOpenLanguageModal?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   onOpenInvoiceModal,
   onOpenQuoteModal,
   onToggleMobileMenu,
+  onOpenLandingPage,
+  onOpenLanguageModal,
 }) => {
   const {
     userProfile,
@@ -36,6 +42,8 @@ export const Navbar: React.FC<NavbarProps> = ({
     batchRemindOverdue,
     darkMode,
     toggleDarkMode,
+    selectedLanguage,
+    t,
   } = usePayFlow();
 
   const [isQrModalOpen, setIsQrModalOpen] = useState(false);
@@ -139,6 +147,30 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             {/* Right: Quick Actions & Profile */}
             <div className="flex items-center space-x-2 sm:space-x-3">
+              {/* Globe Language Selector */}
+              {onOpenLanguageModal && (
+                <button
+                  onClick={onOpenLanguageModal}
+                  className="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-semibold transition-all"
+                  title="Change Language (10 Indian Languages)"
+                >
+                  <Globe className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                  <span className="uppercase text-[11px] font-bold">{selectedLanguage}</span>
+                </button>
+              )}
+
+              {/* Landing Page Button */}
+              {onOpenLandingPage && (
+                <button
+                  onClick={onOpenLandingPage}
+                  className="hidden xl:flex items-center space-x-1 px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-medium transition-all"
+                  title="Return to Landing Page"
+                >
+                  <Home className="w-4 h-4 text-indigo-500" />
+                  <span>Landing Page</span>
+                </button>
+              )}
+
               {/* Dark Mode Toggle */}
               <button
                 onClick={toggleDarkMode}
@@ -165,7 +197,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   title="Send 1-Click Multi-Channel Reminders to all Overdue Clients"
                 >
                   <Bell className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 animate-bounce" />
-                  <span>Udhaar Remind ({metrics.overdueInvoicesCount})</span>
+                  <span>{t('remindOverdue')} ({metrics.overdueInvoicesCount})</span>
                 </button>
               )}
 
