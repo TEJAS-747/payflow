@@ -44,6 +44,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
     batchRemindOverdue,
     calculateOverdueDays,
     getInvoiceRiskRating,
+    t,
   } = usePayFlow();
 
   const [previewInvoice, setPreviewInvoice] = useState<Invoice | null>(null);
@@ -91,7 +92,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               className="flex items-center space-x-1.5 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-xl text-xs shadow-glow-green transition-all hover:scale-102"
             >
               <Plus className="w-4 h-4" />
-              <span>+ Create Invoice</span>
+              <span>{t('createBill')}</span>
             </button>
 
             <button
@@ -99,7 +100,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               className="flex items-center space-x-1.5 px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs shadow-md transition-all hover:scale-102"
             >
               <Sparkles className="w-4 h-4 text-indigo-200" />
-              <span>+ AI Quote</span>
+              <span>{t('rateList')}</span>
             </button>
 
             <button
@@ -107,7 +108,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               className="flex items-center space-x-1.5 px-3.5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-semibold border border-slate-700 transition-all"
             >
               <CreditCard className="w-4 h-4 text-rose-400" />
-              <span>UPI Match</span>
+              <span>{t('upiMatch')}</span>
             </button>
           </div>
         </div>
@@ -117,7 +118,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           {/* 1. Total Income */}
           <div className="bg-slate-800/50 backdrop-blur-sm p-4 rounded-2xl border border-slate-700/60">
             <div className="flex items-center justify-between text-slate-400 text-xs mb-1 font-semibold">
-              <span>Total Kamai / कुल कमाई</span>
+              <span>{t('totalIncome')}</span>
               <DollarSign className="w-4 h-4 text-emerald-400" />
             </div>
             <div className="text-2xl font-black font-mono text-emerald-400">
@@ -132,7 +133,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           {/* 2. Total Outstanding */}
           <div className="bg-slate-800/50 backdrop-blur-sm p-4 rounded-2xl border border-slate-700/60">
             <div className="flex items-center justify-between text-slate-400 text-xs mb-1 font-semibold">
-              <span>Udhaar Baaki / कुल बकाया</span>
+              <span>{t('outstandingBalance')}</span>
               <Clock className="w-4 h-4 text-amber-400" />
             </div>
             <div className="text-2xl font-black font-mono text-amber-300">
@@ -146,21 +147,21 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           {/* 3. Overdue Amount */}
           <div className="bg-slate-800/50 backdrop-blur-sm p-4 rounded-2xl border border-slate-700/60">
             <div className="flex items-center justify-between text-slate-400 text-xs mb-1 font-semibold">
-              <span>Atka Hua Paisa / 7+ दिन से बकाया</span>
+              <span>{t('overdueAmount')}</span>
               <AlertTriangle className="w-4 h-4 text-red-400" />
             </div>
             <div className="text-2xl font-black font-mono text-red-400">
               {formatCurrency(metrics.totalOverdue)}
             </div>
             <div className="text-[11px] text-red-300 mt-1 font-semibold">
-              {metrics.overdueInvoicesCount} bills need reminder / तकादा
+              {metrics.overdueInvoicesCount} bills need reminder
             </div>
           </div>
 
           {/* 4. Due Soon */}
           <div className="bg-slate-800/50 backdrop-blur-sm p-4 rounded-2xl border border-slate-700/60">
             <div className="flex items-center justify-between text-slate-400 text-xs mb-1 font-semibold">
-              <span>Agle 3 Din Mein Due</span>
+              <span>{t('dueSoon')}</span>
               <CheckCircle2 className="w-4 h-4 text-cyan-400" />
             </div>
             <div className="text-2xl font-black font-mono text-cyan-300">

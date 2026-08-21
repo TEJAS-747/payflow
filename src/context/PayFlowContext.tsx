@@ -110,7 +110,7 @@ const LOCAL_STORAGE_KEY = 'payflow_state_v1';
 export const PayFlowProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [selectedLanguage, setSelectedLanguageState] = useState<LanguageCode>(() => {
     const saved = localStorage.getItem(`${LOCAL_STORAGE_KEY}_lang`);
-    return (saved as LanguageCode) || 'hi';
+    return (saved as LanguageCode) || 'en';
   });
 
   const setSelectedLanguage = (lang: LanguageCode) => {

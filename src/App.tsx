@@ -30,6 +30,16 @@ const PayFlowContent: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLanguageModalOpen, setIsLanguageModalOpen] = useState(false);
 
+  // Auto-trigger Language Preference Modal 3 seconds after opening the landing page
+  React.useEffect(() => {
+    if (viewMode === 'landing') {
+      const timer = setTimeout(() => {
+        setIsLanguageModalOpen(true);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [viewMode]);
+
   // Sync with active module filter if changed from navbar switcher
   React.useEffect(() => {
     if (activeModuleFilter !== 'all') {
