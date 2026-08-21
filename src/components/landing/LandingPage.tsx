@@ -56,13 +56,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartApp, onOpenLang
       desc: 'Turn plain language prompts into structured project proposals, milestone breakdowns, and 1-click converted invoices.',
       color: 'from-indigo-500 to-cyan-600',
     },
-    {
-      icon: CreditCard,
-      title: 'UPI Bank Reconciliation',
-      subtitle: 'Bank हिसाब मिलान',
-      desc: 'Import GPay, PhonePe, or bank CSV statements and auto-match incoming UPI transactions with open pending bills.',
-      color: 'from-rose-500 to-teal-600',
-    },
   ];
 
   const stats = [

@@ -146,5 +146,4 @@ export type ActiveModule =
   | 'intelligence'
   | 'quotes'
   | 'clients'
-  | 'reconciliation'
   | 'pricing';

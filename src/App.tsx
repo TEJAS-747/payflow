@@ -65,8 +65,6 @@ const PayFlowContent: React.FC = () => {
         return <QuoteGenerator onNavigateToInvoices={() => handleTabChange('invoicing')} />;
       case 'clients':
         return <ClientCRM />;
-      case 'reconciliation':
-        return <UpiReconciliation />;
       case 'pricing':
         return <PricingStore onSelectModule={(m) => handleTabChange(m)} />;
       case 'all':

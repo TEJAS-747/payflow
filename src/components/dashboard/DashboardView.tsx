@@ -102,14 +102,6 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               <Sparkles className="w-4 h-4 text-indigo-200" />
               <span>{t('rateList')}</span>
             </button>
-
-            <button
-              onClick={() => onNavigateTab('reconciliation')}
-              className="flex items-center space-x-1.5 px-3.5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-semibold border border-slate-700 transition-all"
-            >
-              <CreditCard className="w-4 h-4 text-rose-400" />
-              <span>{t('upiMatch')}</span>
-            </button>
           </div>
         </div>
 

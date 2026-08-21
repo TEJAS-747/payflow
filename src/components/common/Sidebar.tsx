@@ -89,16 +89,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentTab, setCurrentTab }) =
       priceTag: '₹149/mo',
     },
     {
-      id: 'reconciliation',
-      label: t('upiMatch'),
-      subLabel: t('upiSub'),
-      icon: CreditCard,
-      isExtension: true,
-      badge: unreconciledCount > 0 ? `${unreconciledCount} Match` : undefined,
-      badgeColor: 'bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300',
-      priceTag: '₹199/mo',
-    },
-    {
       id: 'pricing',
       label: t('monetizationStore'),
       subLabel: t('pricingSub'),

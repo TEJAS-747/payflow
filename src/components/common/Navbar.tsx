@@ -63,7 +63,6 @@ export const Navbar: React.FC<NavbarProps> = ({
     intelligence: { title: 'Income Intelligence AI', price: '₹299/mo', color: 'bg-purple-600 text-white' },
     quotes: { title: 'AI Quote Generator', price: '₹149/mo', color: 'bg-indigo-600 text-white' },
     clients: { title: 'Independent Client CRM', price: '₹149/mo', color: 'bg-teal-600 text-white' },
-    reconciliation: { title: 'UPI Reconciliation Engine', price: '₹199/mo', color: 'bg-rose-600 text-white' },
     pricing: { title: 'Pricing & Monetization Store', price: 'Store', color: 'bg-slate-800 text-white' },
   };
 

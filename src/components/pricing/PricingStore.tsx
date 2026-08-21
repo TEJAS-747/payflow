@@ -83,7 +83,6 @@ export const PricingStore: React.FC<{ onSelectModule: (module: ActiveModule) => 
         'All 3 Core Modules Included (A + B + C)',
         'Extension 1: Smart AI Quote Generator',
         'Extension 2: Independent Client CRM',
-        'Extension 3: UPI Reconciliation Engine',
         'Instant UPI QR Code Generator',
         'Zero Transaction Commission (100% Direct)',
       ],
