@@ -14,6 +14,7 @@ import { PricingStore } from './components/pricing/PricingStore';
 import { HackathonDemoBar } from './components/demo/HackathonDemoBar';
 import { InvoiceBuilderModal } from './modules/invoicing/InvoiceBuilderModal';
 import { QuoteGeneratorModal } from './modules/quotes/QuoteGeneratorModal';
+import { OnboardingModal } from './components/onboarding/OnboardingModal';
 import { LayoutDashboard, FileText, BellRing, Users, Plus, X } from 'lucide-react';
 
 const PayFlowContent: React.FC = () => {
