@@ -1,28 +1,22 @@
 import React, { useState } from 'react';
 import { usePayFlow } from '../../context/PayFlowContext';
 import type { ActiveModule, Invoice } from '../../types';
+import { formatCurrency } from '../../utils/formatters';
 import {
   DollarSign,
   Clock,
   AlertTriangle,
   CheckCircle2,
-  TrendingUp,
   Plus,
+  Bell,
   Sparkles,
-  Zap,
-  CreditCard,
-  Users,
-  Send,
   ArrowRight,
-  ShieldCheck,
-  FileText,
-  Activity,
+  Eye,
+  Send,
+  Check,
 } from 'lucide-react';
-import { formatCurrency, formatDate } from '../../utils/formatters';
-import { VisualCharts } from '../../modules/intelligence/VisualCharts';
 import { InvoicePreviewModal } from '../../modules/invoicing/InvoicePreviewModal';
 import { SmartReminderModal } from '../../modules/recovery/SmartReminderModal';
-import { MarkAsPaidModal } from '../../modules/recovery/MarkAsPaidModal';
 
 interface DashboardViewProps {
   onNavigateTab: (tab: ActiveModule) => void;
@@ -39,22 +33,18 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
     userProfile,
     metrics,
     invoices,
-    clients,
-    reminderLogs,
+    markAsPaid,
     batchRemindOverdue,
-    calculateOverdueDays,
-    getInvoiceRiskRating,
     t,
   } = usePayFlow();
 
   const [previewInvoice, setPreviewInvoice] = useState<Invoice | null>(null);
   const [remindInvoice, setRemindInvoice] = useState<Invoice | null>(null);
-  const [payInvoice, setPayInvoice] = useState<Invoice | null>(null);
   const [batchNotice, setBatchNotice] = useState<string | null>(null);
 
   const handleBatchRemind = () => {
     const count = batchRemindOverdue();
-    setBatchNotice(`Dispatched smart WhatsApp reminders to ${count} overdue clients!`);
+    setBatchNotice(`Dispatched WhatsApp reminders for ${count} overdue bills!`);
     setTimeout(() => setBatchNotice(null), 4000);
   };
 
@@ -62,34 +52,28 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   const recentInvoices = invoices.slice(0, 5);
 
   return (
-    <div className="space-y-6">
-      {/* Hero Welcome Banner */}
-      <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-emerald-950 rounded-3xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden">
-        <div className="absolute right-0 top-0 translate-x-12 -translate-y-12 w-80 h-80 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none" />
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
+    <div className="space-y-6 max-w-6xl mx-auto">
+      {/* Clean Welcome Header */}
+      <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 sm:p-8 shadow-sm transition-colors">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
-            <div className="flex items-center space-x-2.5 mb-2">
-              <span className="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-bold flex items-center space-x-1">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping inline-block" />
-                <span>Live PayFlow Hub</span>
-              </span>
-              <span className="text-xs text-slate-400 font-medium">
-                {userProfile.businessName} • {userProfile.city}
-              </span>
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 text-xs font-semibold mb-3">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Business Overview • {userProfile.businessName}</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-              Good morning, {userProfile.name} 👋
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+              Welcome back, {userProfile.name} 👋
             </h1>
-            <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-xl">
-              WhatsApp simplicity + Razorpay payments + Zoho invoicing — built for your independent craft.
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+              Here is your simple financial summary for today.
             </p>
           </div>
 
-          {/* Quick Action Pills */}
-          <div className="flex flex-wrap items-center gap-2.5">
+          {/* Primary Quick Actions */}
+          <div className="flex flex-wrap items-center gap-3">
             <button
               onClick={onOpenInvoiceModal}
-              className="flex items-center space-x-1.5 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-xl text-xs shadow-glow-green transition-all hover:scale-102"
+              className="flex items-center space-x-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs sm:text-sm shadow-sm transition-all active:scale-98"
             >
               <Plus className="w-4 h-4" />
               <span>{t('createBill')}</span>
@@ -97,237 +81,210 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
             <button
               onClick={onOpenQuoteModal}
-              className="flex items-center space-x-1.5 px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs shadow-md transition-all hover:scale-102"
+              className="flex items-center space-x-2 px-4 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-semibold rounded-xl text-xs sm:text-sm transition-all"
             >
-              <Sparkles className="w-4 h-4 text-indigo-200" />
+              <Sparkles className="w-4 h-4 text-indigo-500" />
               <span>{t('rateList')}</span>
             </button>
           </div>
         </div>
 
-        {/* 4 Primary Hero KPI Metric Cards */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-8 pt-6 border-t border-slate-800/80">
-          {/* 1. Total Income */}
-          <div className="bg-slate-800/50 backdrop-blur-sm p-4 rounded-2xl border border-slate-700/60">
-            <div className="flex items-center justify-between text-slate-400 text-xs mb-1 font-semibold">
+        {/* 4 Clean Metric Cards */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-8 pt-6 border-t border-slate-100 dark:border-slate-800">
+          {/* Total Income */}
+          <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-200/60 dark:border-slate-700/50">
+            <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs mb-1 font-semibold">
               <span>{t('totalIncome')}</span>
-              <DollarSign className="w-4 h-4 text-emerald-400" />
+              <DollarSign className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             </div>
-            <div className="text-2xl font-black font-mono text-emerald-400">
+            <div className="text-2xl font-bold font-mono text-slate-900 dark:text-white">
               {formatCurrency(metrics.totalIncome)}
             </div>
-            <div className="text-[11px] text-slate-400 mt-1 flex items-center space-x-1">
-              <span className="text-emerald-400 font-bold">100% Direct UPI</span>
-              <span>• ₹0 gateway charges</span>
+            <div className="text-[11px] text-emerald-600 dark:text-emerald-400 mt-1 font-medium">
+              100% Direct UPI Collected
             </div>
           </div>
 
-          {/* 2. Total Outstanding */}
-          <div className="bg-slate-800/50 backdrop-blur-sm p-4 rounded-2xl border border-slate-700/60">
-            <div className="flex items-center justify-between text-slate-400 text-xs mb-1 font-semibold">
+          {/* Total Outstanding */}
+          <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-200/60 dark:border-slate-700/50">
+            <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs mb-1 font-semibold">
               <span>{t('outstandingBalance')}</span>
-              <Clock className="w-4 h-4 text-amber-400" />
+              <Clock className="w-4 h-4 text-amber-500" />
             </div>
-            <div className="text-2xl font-black font-mono text-amber-300">
+            <div className="text-2xl font-bold font-mono text-amber-600 dark:text-amber-400">
               {formatCurrency(metrics.totalOutstanding)}
             </div>
-            <div className="text-[11px] text-slate-400 mt-1">
-              Across {metrics.pendingInvoicesCount + metrics.overdueInvoicesCount} open bills
+            <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 font-medium">
+              {metrics.pendingInvoicesCount + metrics.overdueInvoicesCount} Open Bills
             </div>
           </div>
 
-          {/* 3. Overdue Amount */}
-          <div className="bg-slate-800/50 backdrop-blur-sm p-4 rounded-2xl border border-slate-700/60">
-            <div className="flex items-center justify-between text-slate-400 text-xs mb-1 font-semibold">
+          {/* Overdue Amount */}
+          <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-200/60 dark:border-slate-700/50">
+            <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs mb-1 font-semibold">
               <span>{t('overdueAmount')}</span>
-              <AlertTriangle className="w-4 h-4 text-red-400" />
+              <AlertTriangle className="w-4 h-4 text-red-500" />
             </div>
-            <div className="text-2xl font-black font-mono text-red-400">
+            <div className="text-2xl font-bold font-mono text-red-600 dark:text-red-400">
               {formatCurrency(metrics.totalOverdue)}
             </div>
-            <div className="text-[11px] text-red-300 mt-1 font-semibold">
-              {metrics.overdueInvoicesCount} bills need reminder
+            <div className="text-[11px] text-red-600 dark:text-red-400 mt-1 font-medium">
+              {metrics.overdueInvoicesCount} Urgent Reminders
             </div>
           </div>
 
-          {/* 4. Due Soon */}
-          <div className="bg-slate-800/50 backdrop-blur-sm p-4 rounded-2xl border border-slate-700/60">
-            <div className="flex items-center justify-between text-slate-400 text-xs mb-1 font-semibold">
+          {/* Due Soon */}
+          <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-200/60 dark:border-slate-700/50">
+            <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs mb-1 font-semibold">
               <span>{t('dueSoon')}</span>
-              <CheckCircle2 className="w-4 h-4 text-cyan-400" />
+              <CheckCircle2 className="w-4 h-4 text-cyan-500" />
             </div>
-            <div className="text-2xl font-black font-mono text-cyan-300">
+            <div className="text-2xl font-bold font-mono text-cyan-600 dark:text-cyan-400">
               {formatCurrency(metrics.totalDueSoon)}
             </div>
-            <div className="text-[11px] text-slate-400 mt-1">
-              Auto WhatsApp ready
+            <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 font-medium">
+              Upcoming Payments
             </div>
           </div>
         </div>
       </div>
 
-      {/* Urgent Overdue Alert Banner (If Overdue Invoices Exist) */}
+      {/* Batch Notice Notification */}
+      {batchNotice && (
+        <div className="p-4 bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-800 rounded-xl text-emerald-800 dark:text-emerald-300 text-xs font-semibold flex items-center justify-between">
+          <span>{batchNotice}</span>
+          <Check className="w-4 h-4 text-emerald-600" />
+        </div>
+      )}
+
+      {/* Priority Udhaar Overdue Alert Section */}
       {metrics.overdueInvoicesCount > 0 && (
-        <div className="bg-gradient-to-r from-red-600 to-rose-600 text-white rounded-2xl p-4 sm:p-5 shadow-lg flex flex-col sm:flex-row sm:items-center justify-between gap-3 animate-fadeIn">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
-              <AlertTriangle className="w-6 h-6 text-white" />
-            </div>
+        <div className="bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900/60 rounded-2xl p-5 shadow-sm">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
             <div>
-              <h4 className="font-extrabold text-sm">
-                Dhyan Dein: {formatCurrency(metrics.totalOverdue)} udhaar overdue hai!
-              </h4>
-              <p className="text-xs text-red-100 mt-0.5">
-                {metrics.overdueInvoicesCount} bill overdue hain. 1-Click WhatsApp reminder (तकादा) bhej kar paisa vasool karein.
+              <div className="flex items-center space-x-2 text-red-700 dark:text-red-400 font-bold text-sm">
+                <AlertTriangle className="w-4 h-4" />
+                <span>Overdue Payments Need WhatsApp Reminder ({metrics.overdueInvoicesCount})</span>
+              </div>
+              <p className="text-xs text-red-600 dark:text-red-300/80 mt-0.5">
+                Send 1-click WhatsApp chasers to collect pending payments faster.
               </p>
             </div>
-          </div>
 
-          <div className="flex items-center space-x-2">
             <button
               onClick={handleBatchRemind}
-              className="px-4 py-2 bg-white text-red-700 hover:bg-red-50 font-bold rounded-xl text-xs shadow-sm transition-all whitespace-nowrap"
+              className="flex items-center space-x-2 px-4 py-2 bg-red-600 hover:bg-red-500 text-white font-bold rounded-xl text-xs transition-all shadow-sm shrink-0"
             >
-              ⚡ All Udhaar Reminders Bhejo
-            </button>
-            <button
-              onClick={() => onNavigateTab('recovery')}
-              className="px-3 py-2 bg-red-700/60 hover:bg-red-700 text-white font-semibold rounded-xl text-xs transition-colors whitespace-nowrap"
-            >
-              View Receivables →
-            </button>
-          </div>
-        </div>
-      )}
-
-      {batchNotice && (
-        <div className="p-3 bg-emerald-600 text-white rounded-xl text-xs font-semibold flex items-center space-x-2 animate-fadeIn">
-          <CheckCircle2 className="w-4 h-4 text-emerald-200" />
-          <span>{batchNotice}</span>
-        </div>
-      )}
-
-      {/* Visual Charts Overview */}
-      <VisualCharts />
-
-      {/* Recent Invoices & Live Activity Feed Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left: Recent Invoices */}
-        <div className="lg:col-span-2 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 shadow-sm transition-colors">
-          <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-100 dark:border-slate-800">
-            <div className="flex items-center space-x-2">
-              <FileText className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-              <h3 className="font-bold text-xs uppercase tracking-wider text-slate-800 dark:text-slate-200">
-                Recent Invoices ({invoices.length})
-              </h3>
-            </div>
-            <button
-              onClick={() => onNavigateTab('invoicing')}
-              className="text-xs text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 font-bold flex items-center space-x-1"
-            >
-              <span>View All</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <Bell className="w-4 h-4" />
+              <span>Remind All Overdue Clients</span>
             </button>
           </div>
 
-          <div className="divide-y divide-slate-100 dark:divide-slate-800">
-            {recentInvoices.map((inv) => (
+          <div className="space-y-2">
+            {priorityOverdue.map((inv) => (
               <div
                 key={inv.id}
-                className="py-3 flex items-center justify-between hover:bg-slate-50/60 dark:hover:bg-slate-800/60 rounded-xl px-2 transition-colors"
+                className="bg-white dark:bg-slate-900 p-3.5 rounded-xl border border-red-100 dark:border-red-950 flex items-center justify-between text-xs"
               >
-                <div className="flex items-center space-x-3">
-                  <div
-                    className={`w-9 h-9 rounded-xl flex items-center justify-center font-bold text-xs ${
-                      inv.status === 'paid'
-                        ? 'bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300'
-                        : inv.status === 'overdue'
-                        ? 'bg-red-100 dark:bg-red-950 text-red-800 dark:text-red-300'
-                        : 'bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300'
-                    }`}
-                  >
-                    {inv.clientName.charAt(0)}
-                  </div>
-                  <div>
-                    <div className="flex items-center space-x-2">
-                      <span className="font-bold text-xs text-slate-900 dark:text-white">{inv.clientName}</span>
-                      <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400">{inv.invoiceNumber}</span>
-                    </div>
-                    <span className="text-[11px] text-slate-400 dark:text-slate-500">Due: {formatDate(inv.dueDate)}</span>
-                  </div>
+                <div>
+                  <span className="font-bold text-slate-900 dark:text-white block">{inv.clientName}</span>
+                  <span className="text-slate-500 dark:text-slate-400 text-[11px]">
+                    Bill {inv.invoiceNumber} • Due Date: {inv.dueDate}
+                  </span>
                 </div>
 
                 <div className="flex items-center space-x-3">
-                  <span className="font-mono font-black text-xs text-slate-900 dark:text-white">
-                    {formatCurrency(inv.total)}
+                  <span className="font-mono font-bold text-red-600 dark:text-red-400 text-sm">
+                    {formatCurrency(inv.total - (inv.paidAmount || 0))}
                   </span>
                   <button
-                    onClick={() => setPreviewInvoice(inv)}
-                    className="p-1.5 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-xs"
-                    title="Preview Invoice"
+                    onClick={() => setRemindInvoice(inv)}
+                    className="flex items-center space-x-1 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-lg text-[11px]"
                   >
-                    View
+                    <Send className="w-3 h-3" />
+                    <span>WhatsApp</span>
                   </button>
                 </div>
               </div>
             ))}
           </div>
         </div>
+      )}
 
-        {/* Right: Live Activity Feed */}
-        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 shadow-sm flex flex-col justify-between transition-colors">
+      {/* Recent Invoices Table */}
+      <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
+        <div className="flex items-center justify-between mb-4">
           <div>
-            <div className="flex items-center space-x-2 mb-4 pb-2 border-b border-slate-100 dark:border-slate-800">
-              <Activity className="w-4 h-4 text-purple-600 dark:text-purple-400" />
-              <h3 className="font-bold text-xs uppercase tracking-wider text-slate-800 dark:text-slate-200">
-                Live Activity Feed
-              </h3>
-            </div>
-
-            <div className="space-y-3 text-xs">
-              <div className="flex items-start space-x-2.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 mt-1.5 shrink-0" />
-                <div>
-                  <p className="text-slate-800 dark:text-slate-200 font-semibold">Payment of ₹15,000 settled</p>
-                  <p className="text-[11px] text-slate-400 dark:text-slate-500">Priya Patel via Google Pay UPI • 15 Aug</p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-2.5">
-                <span className="w-2 h-2 rounded-full bg-amber-500 mt-1.5 shrink-0" />
-                <div>
-                  <p className="text-slate-800 dark:text-slate-200 font-semibold">WhatsApp Chaser Delivered</p>
-                  <p className="text-[11px] text-slate-400 dark:text-slate-500">Invoice #INV-1024 to Rahul Sharma • 20 Aug</p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-2.5">
-                <span className="w-2 h-2 rounded-full bg-red-500 mt-1.5 shrink-0" />
-                <div>
-                  <p className="text-slate-800 dark:text-slate-200 font-semibold">Overdue Flag Triggered</p>
-                  <p className="text-[11px] text-slate-400 dark:text-slate-500">Invoice #INV-1019 (Vikram Verma) 16 days late</p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-2.5">
-                <span className="w-2 h-2 rounded-full bg-indigo-500 mt-1.5 shrink-0" />
-                <div>
-                  <p className="text-slate-800 dark:text-slate-200 font-semibold">AI Quote Generated</p>
-                  <p className="text-[11px] text-slate-400 dark:text-slate-500">#QT-501 for ₹10,000 (React Native Prototype)</p>
-                </div>
-              </div>
-            </div>
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">Recent Bills & Invoices</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Quick status of your latest billing entries</p>
           </div>
 
-          <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800">
-            <button
-              onClick={() => onNavigateTab('intelligence')}
-              className="w-full py-2 rounded-xl bg-purple-50 dark:bg-purple-950/50 text-purple-700 dark:text-purple-300 hover:bg-purple-100 dark:hover:bg-purple-900/50 font-bold text-xs transition-colors flex items-center justify-center space-x-1.5"
-            >
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Ask PayFlow Copilot</span>
-            </button>
-          </div>
+          <button
+            onClick={() => onNavigateTab('invoicing')}
+            className="flex items-center space-x-1 text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:underline"
+          >
+            <span>View All Bills</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
+
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-xs">
+            <thead>
+              <tr className="border-b border-slate-200 dark:border-slate-800 text-slate-400 font-semibold uppercase text-[10px]">
+                <th className="pb-3">Bill No.</th>
+                <th className="pb-3">Client</th>
+                <th className="pb-3">Amount</th>
+                <th className="pb-3">Status</th>
+                <th className="pb-3 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60">
+              {recentInvoices.map((inv) => (
+                <tr key={inv.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+                  <td className="py-3 font-mono font-semibold text-slate-900 dark:text-white">
+                    {inv.invoiceNumber}
+                  </td>
+                  <td className="py-3 font-medium text-slate-800 dark:text-slate-200">
+                    {inv.clientName}
+                  </td>
+                  <td className="py-3 font-mono font-bold text-slate-900 dark:text-white">
+                    {formatCurrency(inv.total)}
+                  </td>
+                  <td className="py-3">
+                    <span
+                      className={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase ${
+                        inv.status === 'paid'
+                          ? 'bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300'
+                          : inv.status === 'overdue'
+                          ? 'bg-red-100 dark:bg-red-950 text-red-700 dark:text-red-300'
+                          : 'bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300'
+                      }`}
+                    >
+                      {inv.status}
+                    </span>
+                  </td>
+                  <td className="py-3 text-right space-x-2">
+                    <button
+                      onClick={() => setPreviewInvoice(inv)}
+                      className="p-1.5 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800"
+                      title="View Bill PDF"
+                    >
+                      <Eye className="w-4 h-4" />
+                    </button>
+                    {inv.status !== 'paid' && (
+                      <button
+                        onClick={() => markAsPaid(inv.id, 'upi')}
+                        className="px-2.5 py-1 bg-emerald-600 text-white font-bold rounded-lg text-[10px]"
+                      >
+                        Mark Paid
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
 
@@ -336,6 +293,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         <InvoicePreviewModal
           invoice={previewInvoice}
           onClose={() => setPreviewInvoice(null)}
+          onMarkPaid={(id) => markAsPaid(id, 'upi')}
         />
       )}
 
@@ -343,13 +301,6 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         <SmartReminderModal
           invoice={remindInvoice}
           onClose={() => setRemindInvoice(null)}
-        />
-      )}
-
-      {payInvoice && (
-        <MarkAsPaidModal
-          invoice={payInvoice}
-          onClose={() => setPayInvoice(null)}
         />
       )}
     </div>
