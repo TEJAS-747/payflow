@@ -1,4 +1,4 @@
-import { UserProfile, Client, Invoice, Quote, UpiTransaction, ReminderLog } from '../types';
+import type { UserProfile, Client, Invoice, Quote, UpiTransaction, ReminderLog } from '../types';
 
 export const initialUserProfile: UserProfile = {
   name: 'Aarav Sharma',

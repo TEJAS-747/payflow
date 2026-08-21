@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { PayFlowProvider, usePayFlow } from './context/PayFlowContext';
-import { ActiveModule } from './types';
+import type { ActiveModule } from './types';
 import { Navbar } from './components/common/Navbar';
 import { Sidebar } from './components/common/Sidebar';
 import { DashboardView } from './components/dashboard/DashboardView';

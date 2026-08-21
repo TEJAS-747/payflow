@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { usePayFlow } from '../../context/PayFlowContext';
-import { UpiTransaction } from '../../types';
+import type { UpiTransaction } from '../../types';
 import {
   CreditCard,
   CheckCircle2,

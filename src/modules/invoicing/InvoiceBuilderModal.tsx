@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { usePayFlow } from '../../context/PayFlowContext';
-import { Invoice, InvoiceItem, InvoiceTheme } from '../../types';
+import type { Invoice, InvoiceItem, InvoiceTheme } from '../../types';
 import { X, Plus, Trash2, CheckCircle2, UserPlus, Sparkles, FileText } from 'lucide-react';
 import { formatCurrency } from '../../utils/formatters';
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { usePayFlow } from '../../context/PayFlowContext';
-import { Invoice, InvoiceStatus } from '../../types';
+import type { Invoice, InvoiceStatus } from '../../types';
 import {
   FileText,
   Plus,

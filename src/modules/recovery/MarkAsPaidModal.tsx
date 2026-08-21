@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Invoice } from '../../types';
+import type { Invoice } from '../../types';
 import { usePayFlow } from '../../context/PayFlowContext';
 import { X, CheckCircle2, DollarSign, CreditCard, Sparkles } from 'lucide-react';
 import { formatCurrency } from '../../utils/formatters';

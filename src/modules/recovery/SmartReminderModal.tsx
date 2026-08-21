@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Invoice, DeliveryChannel } from '../../types';
+import type { Invoice, DeliveryChannel } from '../../types';
 import { usePayFlow } from '../../context/PayFlowContext';
 import {
   X,

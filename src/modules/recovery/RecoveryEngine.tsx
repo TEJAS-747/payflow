@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { usePayFlow } from '../../context/PayFlowContext';
-import { Invoice } from '../../types';
+import type { Invoice } from '../../types';
 import {
   BellRing,
   AlertTriangle,

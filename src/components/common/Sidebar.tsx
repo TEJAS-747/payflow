@@ -1,6 +1,6 @@
 import React from 'react';
 import { usePayFlow } from '../../context/PayFlowContext';
-import { ActiveModule } from '../../types';
+import type { ActiveModule } from '../../types';
 import {
   LayoutDashboard,
   FileText,

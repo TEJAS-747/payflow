@@ -1,5 +1,5 @@
 import React from 'react';
-import { Client } from '../../types';
+import type { Client } from '../../types';
 import { usePayFlow } from '../../context/PayFlowContext';
 import { X, Printer, Download, User, Calendar, CheckCircle2, AlertCircle } from 'lucide-react';
 import { formatCurrency, formatDate } from '../../utils/formatters';

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { usePayFlow } from '../../context/PayFlowContext';
-import { Client } from '../../types';
+import type { Client } from '../../types';
 import {
   Users,
   Plus,

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { usePayFlow } from '../../context/PayFlowContext';
-import { ActiveModule, Invoice } from '../../types';
+import type { ActiveModule, Invoice } from '../../types';
 import {
   DollarSign,
   Clock,

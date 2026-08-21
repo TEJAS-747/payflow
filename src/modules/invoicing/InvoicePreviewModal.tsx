@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Invoice, InvoiceTheme } from '../../types';
+import type { Invoice, InvoiceTheme } from '../../types';
 import { usePayFlow } from '../../context/PayFlowContext';
 import {
   X,

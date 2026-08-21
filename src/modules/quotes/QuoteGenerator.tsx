@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { usePayFlow } from '../../context/PayFlowContext';
-import { Quote } from '../../types';
+import type { Quote } from '../../types';
 import {
   Sparkles,
   Plus,

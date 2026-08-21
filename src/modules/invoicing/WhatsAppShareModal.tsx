@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Invoice } from '../../types';
+import type { Invoice } from '../../types';
 import { usePayFlow } from '../../context/PayFlowContext';
 import { X, Send, Copy, Check, MessageSquare, Mail, Smartphone, ExternalLink } from 'lucide-react';
 import { generateWhatsAppLink, formatCurrency, formatDate } from '../../utils/formatters';
