@@ -48,7 +48,6 @@ export const Navbar: React.FC<NavbarProps> = ({
     intelligence: 'Income AI',
     quotes: 'Rate Quotation',
     clients: 'Client CRM',
-    pricing: 'Monetization Store',
   };
 
   return (

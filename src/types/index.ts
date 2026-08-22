@@ -145,5 +145,4 @@ export type ActiveModule =
   | 'recovery'
   | 'intelligence'
   | 'quotes'
-  | 'clients'
-  | 'pricing';
+  | 'clients';

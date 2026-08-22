@@ -10,7 +10,6 @@ import { IntelligenceEngine } from './modules/intelligence/IntelligenceEngine';
 import { QuoteGenerator } from './modules/quotes/QuoteGenerator';
 import { ClientCRM } from './modules/clients/ClientCRM';
 import { UpiReconciliation } from './modules/reconciliation/UpiReconciliation';
-import { PricingStore } from './components/pricing/PricingStore';
 import { InvoiceBuilderModal } from './modules/invoicing/InvoiceBuilderModal';
 import { QuoteGeneratorModal } from './modules/quotes/QuoteGeneratorModal';
 import { OnboardingModal } from './components/onboarding/OnboardingModal';
@@ -64,8 +63,6 @@ const PayFlowContent: React.FC = () => {
         return <QuoteGenerator onNavigateToInvoices={() => handleTabChange('invoicing')} />;
       case 'clients':
         return <ClientCRM />;
-      case 'pricing':
-        return <PricingStore onSelectModule={(m) => handleTabChange(m)} />;
       case 'all':
       default:
         return (

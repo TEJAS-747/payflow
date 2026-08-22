@@ -8,7 +8,6 @@ import {
   BrainCircuit,
   Sparkles,
   Users,
-  Tag,
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -68,12 +67,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentTab, setCurrentTab }) =
       icon: Users,
       badge: clients.length,
       badgeColor: 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300',
-    },
-    {
-      id: 'pricing',
-      label: t('monetizationStore'),
-      subLabel: t('pricingSub'),
-      icon: Tag,
     },
   ];
 
