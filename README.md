@@ -14,25 +14,8 @@ Below is the live recording of **PayFlow** running in Vite:
 
 ## 🖼️ Visual Feature Walkthrough
 
-````carousel
-![Master Financial Dashboard](file:///C:/Users/tejas/.gemini/antigravity-ide/brain/60a7c26b-06a2-4d9c-8dc4-a772072bae58/dashboard_view_1787318599466.png)
-<!-- slide -->
-![Smart Invoicing Engine](file:///C:/Users/tejas/.gemini/antigravity-ide/brain/60a7c26b-06a2-4d9c-8dc4-a772072bae58/smart_invoicing_view_1787318631739.png)
-<!-- slide -->
-![Automated Debt Recovery Engine](file:///C:/Users/tejas/.gemini/antigravity-ide/brain/60a7c26b-06a2-4d9c-8dc4-a772072bae58/payment_recovery_view_1787318649436.png)
-<!-- slide -->
-![Cashflow Intelligence & AI Analytics](file:///C:/Users/tejas/.gemini/antigravity-ide/brain/60a7c26b-06a2-4d9c-8dc4-a772072bae58/income_intelligence_view_1787318669775.png)
-<!-- slide -->
-![AI Quote Generator & Conversion](file:///C:/Users/tejas/.gemini/antigravity-ide/brain/60a7c26b-06a2-4d9c-8dc4-a772072bae58/ai_quote_generator_view_1787318694582.png)
-<!-- slide -->
-![Client CRM & Credit Scoring](file:///C:/Users/tejas/.gemini/antigravity-ide/brain/60a7c26b-06a2-4d9c-8dc4-a772072bae58/client_crm_view_1787318721518.png)
-<!-- slide -->
-![UPI & Bank Auto-Reconciliation](file:///C:/Users/tejas/.gemini/antigravity-ide/brain/60a7c26b-06a2-4d9c-8dc4-a772072bae58/upi_reconciliation_view_1787318747877.png)
-<!-- slide -->
-![Interactive Invoice Builder Modal](file:///C:/Users/tejas/.gemini/antigravity-ide/brain/60a7c26b-06a2-4d9c-8dc4-a772072bae58/invoice_builder_modal_1787318817611.png)
-````
+![Uploading image.png…]()
 
----
 
 ## 🛠️ Technology Stack & Project Architecture
 
